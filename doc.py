@@ -1,4 +1,4 @@
-from sympy import cos, exp, integrate, sqrt, diff
+from sympy import cos, exp, integrate, sqrt, diff, limit, Limit, oo
 from sympy.integrals.manualintegrate import manualintegrate
 from sympy.integrals.risch import NonElementaryIntegral
 from sympy.abc import x
@@ -54,6 +54,13 @@ class MathDoc(Document):
             agn.append(r'=')
             agn.append(latex(solution))
 
+    def Lim(self, problem, a=0):
+        solution = limit(problem, x, a)
+        with self.create(Alignat(numbering=True, escape=False)) as agn:
+            agn.append(latex(Limit(problem, x, a)))
+            agn.append(r'=')
+            agn.append(latex(solution))
+
     def Plot(self, equation, height='6cm', width='6cm',
              grid='both', axis_lines='middle'):
         with self.create(Center()):
@@ -75,5 +82,6 @@ if __name__ == '__main__':
     doc.Diff(x**x)
     doc.Diff(x**x, 2)
     doc.Diff(x**(1/x), 2)
+    doc.Lim(1/x, oo)
 
     doc.generate_pdf(file_name, clean_tex=True)

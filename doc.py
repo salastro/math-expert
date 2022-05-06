@@ -28,21 +28,21 @@ class MathDoc(Document):
         self.Heading(title, author, date)
         self.generate_tex(file)
 
-    def Inte(self, problem):
-        solution = manualintegrate(problem, x)
-        if isinstance(integrate(problem.rewrite(cos, exp), x, risch=True),
+    def Inte(self, equation):
+        solution = manualintegrate(equation, x)
+        if isinstance(integrate(equation.rewrite(cos, exp), x, risch=True),
                       NonElementaryIntegral):
             solution = 'Non-elementary'
         with self.create(Alignat(numbering=True, escape=False)) as agn:
             agn.append(r'\int')
-            agn.append(latex(problem))
+            agn.append(latex(equation))
             agn.append(r'\, dx')
             agn.append(r'=')
             agn.append(latex(solution))
             agn.append(r'+C')
 
-    def Diff(self, problem, n=1):
-        solution = problem
+    def Diff(self, equation, n=1):
+        solution = equation
         for _ in range(n):
             solution = diff(solution, x)
         with self.create(Alignat(numbering=True, escape=False)) as agn:
@@ -50,14 +50,14 @@ class MathDoc(Document):
                 agn.append(r'\frac{d}{dx}')
             else:
                 agn.append(r'\frac{d^'+str(n)+'}{dx^'+str(n)+'}')
-            agn.append(latex(problem))
+            agn.append(latex(equation))
             agn.append(r'=')
             agn.append(latex(solution))
 
-    def Lim(self, problem, a=0):
-        solution = limit(problem, x, a)
+    def Lim(self, equation, a=0):
+        solution = limit(equation, x, a)
         with self.create(Alignat(numbering=True, escape=False)) as agn:
-            agn.append(latex(Limit(problem, x, a)))
+            agn.append(latex(Limit(equation, x, a)))
             agn.append(r'=')
             agn.append(latex(solution))
 

@@ -1,5 +1,6 @@
 from doc import MathDoc
-from sympy import sin, cos, tan, exp, log, sqrt, sympify, pi, oo, symbols  # common math
+from sympy import sin, cos, tan, exp, log, sqrt, sympify, pi, oo, \
+    symbols, asin, acos, atan  # common math
 from sympy import Function
 from gui import QtWidgets, Ui_MainWindow  # gui
 
@@ -29,6 +30,8 @@ if __name__ == "__main__":
         sympify(ui.expTxt.toPlainText().split(',')[1])))  # Limit button.
     ui.simpBt.clicked.connect(lambda: math_doc.Simp(
         sympify(ui.expTxt.toPlainText())))  # simplfiy button
+    ui.factBt.clicked.connect(lambda: math_doc.Fact(
+        sympify(ui.expTxt.toPlainText())))  # factorize button
     ui.plotBt.clicked.connect(lambda: math_doc.Plot(
         (ui.expTxt.toPlainText())))  # The plot button.
     ui.genPdfBt.clicked.connect(lambda: math_doc.GenPdf(ui.fileTxt.toPlainText(

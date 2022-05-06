@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>528</width>
-    <height>600</height>
+    <width>569</width>
+    <height>636</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,7 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="3" column="0" colspan="2">
+    <item row="4" column="0" colspan="2">
      <widget class="QPlainTextEdit" name="titleTxt">
       <property name="font">
        <font>
@@ -27,7 +27,7 @@
       </property>
      </widget>
     </item>
-    <item row="7" column="1">
+    <item row="8" column="1">
      <widget class="QLabel" name="label_5">
       <property name="font">
        <font>
@@ -39,7 +39,7 @@
       </property>
      </widget>
     </item>
-    <item row="14" column="0">
+    <item row="18" column="0">
      <widget class="QLabel" name="label_3">
       <property name="font">
        <font>
@@ -51,7 +51,7 @@
       </property>
      </widget>
     </item>
-    <item row="8" column="0">
+    <item row="9" column="0">
      <widget class="QPushButton" name="diffBt">
       <property name="font">
        <font>
@@ -63,7 +63,7 @@
       </property>
      </widget>
     </item>
-    <item row="11" column="1">
+    <item row="12" column="1">
      <widget class="QPushButton" name="subBt">
       <property name="font">
        <font>
@@ -75,7 +75,7 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="0" colspan="2">
+    <item row="2" column="0" colspan="2">
      <widget class="QLabel" name="label_4">
       <property name="font">
        <font>
@@ -88,19 +88,67 @@
       </property>
      </widget>
     </item>
-    <item row="12" column="0">
-     <widget class="QLabel" name="label_6">
+    <item row="9" column="1">
+     <widget class="QPushButton" name="simpBt">
       <property name="font">
        <font>
-        <pointsize>14</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
       <property name="text">
-       <string>Graphics</string>
+       <string>Simplify</string>
       </property>
      </widget>
     </item>
-    <item row="0" column="0" colspan="2">
+    <item row="5" column="0" colspan="2">
+     <widget class="QPlainTextEdit" name="authorTxt">
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+      <property name="plainText">
+       <string>Author</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="0" colspan="2">
+     <widget class="QPlainTextEdit" name="expTxt">
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+      <property name="plainText">
+       <string>Expression</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0" colspan="2">
+     <widget class="QPlainTextEdit" name="fileTxt">
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+      <property name="plainText">
+       <string>File</string>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="0">
+     <widget class="QPushButton" name="inteBt">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Integrate</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
      <widget class="QLabel" name="label">
       <property name="font">
        <font>
@@ -113,67 +161,7 @@
       </property>
      </widget>
     </item>
-    <item row="8" column="1">
-     <widget class="QPushButton" name="simpBt">
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Simplify</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="0" colspan="2">
-     <widget class="QPlainTextEdit" name="authorTxt">
-      <property name="font">
-       <font>
-        <pointsize>11</pointsize>
-       </font>
-      </property>
-      <property name="plainText">
-       <string>Author</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="0" colspan="2">
-     <widget class="QPlainTextEdit" name="expTxt">
-      <property name="font">
-       <font>
-        <pointsize>11</pointsize>
-       </font>
-      </property>
-      <property name="plainText">
-       <string>Expression</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0" colspan="2">
-     <widget class="QPlainTextEdit" name="fileTxt">
-      <property name="font">
-       <font>
-        <pointsize>11</pointsize>
-       </font>
-      </property>
-      <property name="plainText">
-       <string>File</string>
-      </property>
-     </widget>
-    </item>
-    <item row="11" column="0">
-     <widget class="QPushButton" name="inteBt">
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Integrate</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="0">
+    <item row="8" column="0">
      <widget class="QLabel" name="label_2">
       <property name="font">
        <font>
@@ -185,7 +173,7 @@
       </property>
      </widget>
     </item>
-    <item row="15" column="0">
+    <item row="19" column="0">
      <widget class="QPushButton" name="genPdfBt">
       <property name="font">
        <font>
@@ -197,7 +185,7 @@
       </property>
      </widget>
     </item>
-    <item row="15" column="1">
+    <item row="19" column="1">
      <widget class="QPushButton" name="genLatexBt">
       <property name="font">
        <font>
@@ -210,6 +198,25 @@
      </widget>
     </item>
     <item row="13" column="0">
+     <widget class="QPushButton" name="limBt">
+      <property name="text">
+       <string>Limit</string>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="1">
+     <widget class="QLabel" name="label_6">
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Graphics</string>
+      </property>
+     </widget>
+    </item>
+    <item row="14" column="1">
      <widget class="QPushButton" name="plotBt">
       <property name="font">
        <font>

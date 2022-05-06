@@ -1,6 +1,6 @@
 from sympy import cos, exp, integrate, sqrt, diff, limit, Limit, oo, \
-    simplify, factor
-from sympy.integrals.manualintegrate import manualintegrate
+    simplify, factor, trigsimp
+# from sympy.integrals.manualintegrate import manualintegrate, integral_steps
 from sympy.integrals.risch import NonElementaryIntegral
 from sympy.abc import x
 from sympy.printing import latex
@@ -30,7 +30,7 @@ class MathDoc(Document):
         self.generate_tex(file)
 
     def Inte(self, equation):
-        solution = manualintegrate(equation, x)
+        solution = trigsimp(simplify(integrate(equation, x)))
         if isinstance(integrate(equation.rewrite(cos, exp), x, risch=True),
                       NonElementaryIntegral):
             solution = 'Non-elementary'
@@ -45,7 +45,7 @@ class MathDoc(Document):
     def Diff(self, equation, n=1):
         solution = equation
         for _ in range(n):
-            solution = diff(solution, x)
+            solution = simplify(diff(solution, x))
         with self.create(Alignat(numbering=True, escape=False)) as agn:
             if n == 1:
                 agn.append(r'\frac{d}{dx}')
@@ -63,7 +63,7 @@ class MathDoc(Document):
             agn.append(latex(solution))
 
     def Simp(self, equation):
-        solution = simplify(equation)
+        solution = trigsimp(simplify(equation))
         with self.create(Alignat(numbering=True, escape=False)) as agn:
             agn.append(latex(equation))
             agn.append(r'=')

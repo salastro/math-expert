@@ -1,5 +1,5 @@
 from doc import MathDoc
-from sympy import sin, cos, exp, log, sqrt, sympify, pi  # common math functions
+from sympy import sin, cos, tan, exp, log, sqrt, sympify, pi, oo  # common math
 from sympy.abc import x  # x symbols
 from gui import QtWidgets, Ui_MainWindow  # gui
 
@@ -15,19 +15,22 @@ if __name__ == "__main__":
     # Setup the document and buttons.
     math_doc = MathDoc()  # The document.
     math_doc.GenPdf(ui.fileTxt.toPlainText(), ui.titleTxt.toPlainText(),
-                 ui.authorTxt.toPlainText(), clean_tex=True)
+                    ui.authorTxt.toPlainText(), clean_tex=True)
     # Initialize the document.
     ui.inteBt.clicked.connect(lambda: math_doc.Inte(
-        sympify(ui.expTxt.toPlainText())))  # The integral button.
+        sympify(ui.expTxt.toPlainText())))  # Integral button.
     ui.diffBt.clicked.connect(lambda: math_doc.Diff(
-        sympify(ui.expTxt.toPlainText())))  # The differentiation button.
+        sympify(ui.expTxt.toPlainText())))  # Derivative button.
+    ui.limBt.clicked.connect(lambda: math_doc.Lim(
+        sympify(ui.expTxt.toPlainText().split(',')[0]),
+        sympify(ui.expTxt.toPlainText().split(',')[1])))  # Limit button.
     ui.plotBt.clicked.connect(lambda: math_doc.Plot(
         (ui.expTxt.toPlainText())))  # The plot button.
     ui.genPdfBt.clicked.connect(lambda: math_doc.GenPdf(ui.fileTxt.toPlainText(
     ), ui.titleTxt.toPlainText(), ui.authorTxt.toPlainText(), clean_tex=True))
     # The generate pdf button.
     ui.genLatexBt.clicked.connect(lambda: math_doc.GenTex(ui.fileTxt.toPlainText(
-        ), ui.titleTxt.toPlainText(), ui.authorTxt.toPlainText()))
+    ), ui.titleTxt.toPlainText(), ui.authorTxt.toPlainText()))
     # The generate tex button.
 
     MainWindow.show()

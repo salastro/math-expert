@@ -14,13 +14,21 @@ if __name__ == "__main__":
 
     # Setup the document and buttons.
     math_doc = MathDoc()  # The document.
+    math_doc.GenPdf(ui.fileTxt.toPlainText(), ui.titleTxt.toPlainText(),
+                 ui.authorTxt.toPlainText(), clean_tex=True)
+    # Initialize the document.
     ui.inteBt.clicked.connect(lambda: math_doc.Inte(
         sympify(ui.expTxt.toPlainText())))  # The integral button.
     ui.diffBt.clicked.connect(lambda: math_doc.Diff(
         sympify(ui.expTxt.toPlainText())))  # The differentiation button.
-    ui.genPdfBt.clicked.connect(lambda: math_doc.Gen(ui.fileTxt.toPlainText(
+    ui.plotBt.clicked.connect(lambda: math_doc.Plot(
+        (ui.expTxt.toPlainText())))  # The plot button.
+    ui.genPdfBt.clicked.connect(lambda: math_doc.GenPdf(ui.fileTxt.toPlainText(
     ), ui.titleTxt.toPlainText(), ui.authorTxt.toPlainText(), clean_tex=True))
     # The generate pdf button.
+    ui.genLatexBt.clicked.connect(lambda: math_doc.GenTex(ui.fileTxt.toPlainText(
+        ), ui.titleTxt.toPlainText(), ui.authorTxt.toPlainText()))
+    # The generate tex button.
 
     MainWindow.show()
     sys.exit(app.exec_())

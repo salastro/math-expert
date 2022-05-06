@@ -28,6 +28,8 @@ if __name__ == "__main__":
     ui.limBt.clicked.connect(lambda: math_doc.Lim(
         sympify(ui.expTxt.toPlainText().split(',')[0]),
         sympify(ui.expTxt.toPlainText().split(',')[1])))  # Limit button.
+    ui.simpBt.clicked.connect(lambda: math_doc.Simp(
+        sympify(ui.expTxt.toPlainText())))
     ui.plotBt.clicked.connect(lambda: math_doc.Plot(
         (ui.expTxt.toPlainText())))  # The plot button.
     ui.genPdfBt.clicked.connect(lambda: math_doc.GenPdf(ui.fileTxt.toPlainText(

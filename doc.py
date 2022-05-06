@@ -54,7 +54,7 @@ class MathDoc(Document):
             agn.append(r'=')
             agn.append(latex(solution))
 
-    def Plot(self, equation, height='4cm', width='6cm',
+    def Plot(self, equation, height='6cm', width='6cm',
              grid='both', axis_lines='middle'):
         with self.create(Center()):
             with self.create(TikZ()):

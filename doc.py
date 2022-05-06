@@ -1,4 +1,4 @@
-from sympy import cos, exp, integrate, sqrt, diff, limit, Limit, oo
+from sympy import cos, exp, integrate, sqrt, diff, limit, Limit, oo, simplify
 from sympy.integrals.manualintegrate import manualintegrate
 from sympy.integrals.risch import NonElementaryIntegral
 from sympy.abc import x
@@ -58,6 +58,13 @@ class MathDoc(Document):
         solution = limit(equation, x, a)
         with self.create(Alignat(numbering=True, escape=False)) as agn:
             agn.append(latex(Limit(equation, x, a)))
+            agn.append(r'=')
+            agn.append(latex(solution))
+
+    def Simp(self, equation):
+        solution = simplify(equation)
+        with self.create(Alignat(numbering=True, escape=False)) as agn:
+            agn.append(latex(equation))
             agn.append(r'=')
             agn.append(latex(solution))
 

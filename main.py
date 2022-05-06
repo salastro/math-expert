@@ -18,9 +18,8 @@ if __name__ == "__main__":
 
     # Setup the document and buttons.
     math_doc = MathDoc()  # The document.
-    math_doc.GenPdf(ui.fileTxt.toPlainText(), ui.titleTxt.toPlainText(),
-                    ui.authorTxt.toPlainText(), clean_tex=True)
-    # Initialize the document.
+    # math_doc.GenPdf(ui.fileTxt.toPlainText(), ui.titleTxt.toPlainText(),
+    # ui.authorTxt.toPlainText(), clean_tex=True)  # Initialize the document.
     ui.inteBt.clicked.connect(lambda: math_doc.Inte(
         sympify(ui.expTxt.toPlainText())))  # Integral button.
     ui.diffBt.clicked.connect(lambda: math_doc.Diff(
@@ -29,7 +28,7 @@ if __name__ == "__main__":
         sympify(ui.expTxt.toPlainText().split(',')[0]),
         sympify(ui.expTxt.toPlainText().split(',')[1])))  # Limit button.
     ui.simpBt.clicked.connect(lambda: math_doc.Simp(
-        sympify(ui.expTxt.toPlainText())))
+        sympify(ui.expTxt.toPlainText())))  # simplfiy button
     ui.plotBt.clicked.connect(lambda: math_doc.Plot(
         (ui.expTxt.toPlainText())))  # The plot button.
     ui.genPdfBt.clicked.connect(lambda: math_doc.GenPdf(ui.fileTxt.toPlainText(

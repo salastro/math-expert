@@ -1,7 +1,11 @@
 from doc import MathDoc
-from sympy import sin, cos, tan, exp, log, sqrt, sympify, pi, oo  # common math
-from sympy.abc import x  # x symbols
+from sympy import sin, cos, tan, exp, log, sqrt, sympify, pi, oo, symbols  # common math
+from sympy import Function
 from gui import QtWidgets, Ui_MainWindow  # gui
+
+# common symbols
+x, y, z, t = symbols('x y z t')
+f, g, h = symbols('f g h', cls=Function)
 
 
 if __name__ == "__main__":

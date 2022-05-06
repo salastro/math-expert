@@ -15,6 +15,18 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
+    <item row="9" column="1">
+     <widget class="QLabel" name="label_5">
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Algebra</string>
+      </property>
+     </widget>
+    </item>
     <item row="4" column="0" colspan="2">
      <widget class="QPlainTextEdit" name="titleTxt">
       <property name="font">
@@ -27,19 +39,7 @@
       </property>
      </widget>
     </item>
-    <item row="8" column="1">
-     <widget class="QLabel" name="label_5">
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Algebra</string>
-      </property>
-     </widget>
-    </item>
-    <item row="18" column="0">
+    <item row="20" column="0">
      <widget class="QLabel" name="label_3">
       <property name="font">
        <font>
@@ -51,27 +51,18 @@
       </property>
      </widget>
     </item>
-    <item row="9" column="0">
+    <item row="10" column="0">
      <widget class="QPushButton" name="diffBt">
       <property name="font">
        <font>
         <pointsize>10</pointsize>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="text">
        <string>Differentiate</string>
-      </property>
-     </widget>
-    </item>
-    <item row="12" column="1">
-     <widget class="QPushButton" name="subBt">
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Substitute</string>
       </property>
      </widget>
     </item>
@@ -88,7 +79,7 @@
       </property>
      </widget>
     </item>
-    <item row="9" column="1">
+    <item row="10" column="1">
      <widget class="QPushButton" name="simpBt">
       <property name="font">
        <font>
@@ -136,7 +127,7 @@
       </property>
      </widget>
     </item>
-    <item row="12" column="0">
+    <item row="13" column="0">
      <widget class="QPushButton" name="inteBt">
       <property name="font">
        <font>
@@ -145,6 +136,18 @@
       </property>
       <property name="text">
        <string>Integrate</string>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="1">
+     <widget class="QLabel" name="label_6">
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Graphics</string>
       </property>
      </widget>
     </item>
@@ -161,31 +164,7 @@
       </property>
      </widget>
     </item>
-    <item row="8" column="0">
-     <widget class="QLabel" name="label_2">
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Calculus</string>
-      </property>
-     </widget>
-    </item>
-    <item row="19" column="0">
-     <widget class="QPushButton" name="genPdfBt">
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Generate PDF</string>
-      </property>
-     </widget>
-    </item>
-    <item row="19" column="1">
+    <item row="21" column="1">
      <widget class="QPushButton" name="genLatexBt">
       <property name="font">
        <font>
@@ -197,26 +176,38 @@
       </property>
      </widget>
     </item>
-    <item row="13" column="0">
+    <item row="21" column="0">
+     <widget class="QPushButton" name="genPdfBt">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Generate PDF</string>
+      </property>
+     </widget>
+    </item>
+    <item row="15" column="0">
      <widget class="QPushButton" name="limBt">
       <property name="text">
        <string>Limit</string>
       </property>
      </widget>
     </item>
-    <item row="13" column="1">
-     <widget class="QLabel" name="label_6">
+    <item row="9" column="0">
+     <widget class="QLabel" name="label_2">
       <property name="font">
        <font>
         <pointsize>14</pointsize>
        </font>
       </property>
       <property name="text">
-       <string>Graphics</string>
+       <string>Calculus</string>
       </property>
      </widget>
     </item>
-    <item row="14" column="1">
+    <item row="15" column="1">
      <widget class="QPushButton" name="plotBt">
       <property name="font">
        <font>

@@ -1,16 +1,19 @@
+# Math Expert
+*Let me do your work*
+
 ## COCOMO estimation
 ```
 ───────────────────────────────────────────────────────────────────────────────
 Language                 Files     Lines   Blanks  Comments     Code Complexity
 ───────────────────────────────────────────────────────────────────────────────
-Python                       3       245       24        13      208          7
+Python                       3       279       26        14      239          7
 ───────────────────────────────────────────────────────────────────────────────
-Total                        3       245       24        13      208          7
+Total                        3       279       26        14      239          7
 ───────────────────────────────────────────────────────────────────────────────
-Estimated Cost to Develop (organic) $5,194
-Estimated Schedule Effort (organic) 1.863492 months
-Estimated People Required (organic) 0.247657
+Estimated Cost to Develop (organic) $6,010
+Estimated Schedule Effort (organic) 1.969704 months
+Estimated People Required (organic) 0.271099
 ───────────────────────────────────────────────────────────────────────────────
-Processed 10036 bytes, 0.010 megabytes (SI)
+Processed 11720 bytes, 0.012 megabytes (SI)
 ───────────────────────────────────────────────────────────────────────────────
 ```

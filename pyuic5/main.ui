@@ -23,7 +23,7 @@
        </font>
       </property>
       <property name="plainText">
-       <string>File</string>
+       <string>MathDocument</string>
       </property>
      </widget>
     </item>
@@ -83,7 +83,7 @@
        </font>
       </property>
       <property name="plainText">
-       <string>Expression</string>
+       <string>(sin(x)^2-cos(x)^2)/(cos(x)^2*sin(x)^2)</string>
       </property>
      </widget>
     </item>
@@ -127,7 +127,7 @@
        </font>
       </property>
       <property name="plainText">
-       <string>Title</string>
+       <string>STEM Luxor Grade 12 Math Project</string>
       </property>
      </widget>
     </item>
@@ -178,7 +178,7 @@
        </font>
       </property>
       <property name="plainText">
-       <string>Author</string>
+       <string>Marawan, SalahDin, Younis</string>
       </property>
      </widget>
     </item>
@@ -265,6 +265,18 @@
       </property>
       <property name="text">
        <string>Limit</string>
+      </property>
+     </widget>
+    </item>
+    <item row="16" column="0">
+     <widget class="QPushButton" name="pushButton">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Solve ODE</string>
       </property>
      </widget>
     </item>

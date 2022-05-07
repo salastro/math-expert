@@ -131,7 +131,7 @@ aliens will understand the paradigms of this code.
 * Unappealing UI
 * No indication when unsolvable
 
-## Feature plans
+## Future plans
 See [issues](https://github.com/salastro/math-expert/issues)
 
 ## Usage

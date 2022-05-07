@@ -86,6 +86,48 @@ made.
 
 ## Philosophy
 
+Although the infamous *[it just works](https://www.zdnet.com/article/apple-seems-to-have-forgotten-about-the-whole-it-just-works-thing/)*
+is spread throughout the codebase, which is not ideal for a structured
+project, the goal of our is to define a great code that follows best
+practices (e.g. [PEP 8](https://peps.python.org/pep-0008/)) to have a
+readable, maintainable, and legacy-free codebase to stand in the way of
+passing time for the longest. As such, a minimal amount of code is
+necessary to avoid using breakable functions; a suitable modus operandi
+is the [suckless philosophy](https://suckless.org/philosophy/). On the
+other hand, extensibility and customizability is as important.
+[Unix philosophy](https://en.wikipedia.org/wiki/Unix_philosophy) is the
+one method that is well-regarded as the jewel in the crown.
+
+[Object orientation](https://en.wikipedia.org/wiki/Object-oriented_programming)
+was used due to its inheritance, encapsulation, and other proprieties;
+some of which can not be achieve through
+[modularity](https://en.wikipedia.org/wiki/Modular_programming) alone
+resulting in a more complex codebase. In addition, the structural way
+PyLaTeX handles documents would make it even harder to avoid object
+oriented programming, despite its known
+[disadvantages](https://www.youtube.com/watch?v=QM1iUe6IofM). However,
+parts of SymPy and NumPy code was written in a more
+[procedural](https://en.wikipedia.org/wiki/Procedural_programming) way.
+
+
+### Codebase
+
+As mentioned above, the goals of the code are minimalism, functionality,
+extensibility, and customizability. The program is divided into 3
+separate files: `gui.py` for all of the UI elements, `doc.py` for all
+the operations on documents, and `main.py` for the main program and
+linking of the two. This was to ease the switching of undesired modules
+and separate development based on the working context.
+
+`doc.py` was mainly structured as a one class `MathDoc` with multiple methods for
+document manipulation (e.g. `Inte`, `Diff`, etc). The class is
+instantiated and used in `main.py` in the `__name__ == "__main__"` if
+statement after the imports outside the conditional; on every button
+click the corresponding method is called. In contrast, explicit mentions
+of `gui.py` are rare (besides the linkage ones) since all of its
+handling is in the file itself.
+
+<!--
 It follows the *just works* philosophy and focuses on getting stuff
 done. The code base is so bad that we could be paid not to work on it.
 There is no clear structure followed. Sometimes you fill find patterns
@@ -93,6 +135,7 @@ that is clear crystal, yet they are avoided to make a worse codebase. We
 do not believe in: OO, Functional, Array, Prototype, Procedural,
 Declarative, or any other programming paradigm known to human kind. Only
 aliens will understand the paradigms of this code.
+-->
 
 ## [COCOMO](https://en.wikipedia.org/wiki/COCOMO) estimations
 ***Using [scc](https://github.com/boyter/scc)***

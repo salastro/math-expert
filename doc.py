@@ -1,6 +1,6 @@
 from __future__ import division
 from sympy import integrate, sqrt, diff, limit, Limit, oo, simplify, factor, \
-        trigsimp, Eq, solve, sympify, Derivative
+        trigsimp, Eq, solve, sympify, Derivative, Integral
 
 # from sympy.integrals.manualintegrate import manualintegrate, integral_steps
 # from sympy.integrals.risch import NonElementaryIntegral
@@ -34,10 +34,9 @@ class MathDoc(Document):
 
     def Inte(self, equation):
         solution = trigsimp(simplify(integrate(equation, x)))
+        equation = Integral(equation, x)
         with self.create(Alignat(numbering=True, escape=False)) as agn:
-            agn.append(r'\int')
             agn.append(latex(equation))
-            agn.append(r'\, dx')
             agn.append(r'=')
             agn.append(latex(solution))
             agn.append(r'+C')

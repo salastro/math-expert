@@ -34,6 +34,22 @@ were used, the focus was on SymPy due to the symbolic focus of the
 project. The latter is powerful in mathematical evaluations, which
 — although supported — is not the focus of this project.
 
+## Usage
+
+Although the interface is obvious, some clarifications may need to be
+made.
+* First text input is the file name without extension
+* Second text input is the document title
+* Third text input is the author(s) title
+* Fourth (and last) text input is the mathematical expression to be
+  operated on
+    * Euler's number should be written as `exp(x)` instead of `e^(x)`
+    * `log` is the natural logarithm.
+    * Multiplication should be written in the form `2*x`
+* After defining all the previous inputs, click *Generate PDF*
+* Choose the type of operation you want to perform, then click *Generate
+  PDF* again
+
 ## Dependences
 ### Building
 * [Python](https://www.python.org/) 3.10:

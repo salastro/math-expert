@@ -2,7 +2,8 @@
 *Let me do your work*
 
 ## Preview
-<video src="media/preview.mp4" width="100%"></video>
+
+https://user-images.githubusercontent.com/63563250/167239624-4faf126e-fd08-49f9-87df-b7820664ca6c.mp4
 
 ## Introduction
 **Math Expert** is our (@salastro, @younis-tarek, @marawn-mogeb) math high

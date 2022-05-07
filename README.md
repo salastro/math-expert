@@ -28,11 +28,33 @@ hard to use making it difficult to use in a short-term practical
 context. This makes the done application even more useful. It was mainly
 interacted with through [PyLaTeX](https://jeltef.github.io/PyLaTeX/); it
 provides a usable set of commands that make use of LaTeX's capabilities.
+It uses the standard article document class with numbered math alignment
+environment and TikZ for drawing.
 
 Although both [SymPy](https://www.sympy.org/) and [NumPy](https://numpy.org/)
-were used, the focus was on SymPy due to the symbolic focus of the
-project. The latter is powerful in mathematical evaluations, which
-— although supported — is not the focus of this project.
+were used, the focus was on SymPy due to its nature of symbolic
+manipulation and its alignment with the goals of the project. The latter
+is powerful in mathematical evaluations, which — although supported — is
+not the focus of this project. The results of all functions, other than
+`Evaluate`, are performed through SymPy. It provides more than one
+function to preform some of the operations in hand, but the one that
+proves to be the most effective is used. For example, there are
+`integrate` and `manualintegrate`, and although the latter can show
+steps (non-human-readable), the latter were chose for its wide variety
+of solutions.
+
+Unlike the previous two, the choice of a GUI framework was not a
+straightforward decision. [Kivy](https://kivy.org/) was a serious
+candidate, but due to of its own unique syntax for designing being its
+bedrock and lack of some convenient Python capabilities use, it was not
+feasible. Another option was [Tkinter](https://docs.python.org/3/library/tkinter.html),
+which is considered the main framework for Python. However, it is very
+lacking some of modern UI designing features and is not plain sailing in
+some considerable aspects. The final option was [PyQt5](https://www.riverbankcomputing.com/software/pyqt/),
+which is a Python binding for the [Qt](https://www.qt.io/)
+cross-platform framework. Basically utilizing all of the powerful
+aspects of the Qt framework, which avoid the aforementioned
+limitations, while maintain a usable toolkit.
 
 ## Usage
 

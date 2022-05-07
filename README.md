@@ -28,8 +28,8 @@ hard to use making it difficult to use in a short-term practical
 context. This makes the done application even more useful. It was mainly
 interacted with through [PyLaTeX](https://jeltef.github.io/PyLaTeX/); it
 provides a usable set of commands that make use of LaTeX's capabilities.
-It uses the standard article document class with numbered math alignment
-environment and TikZ for drawing.
+The standard article document class with numbered math alignment
+environment and TikZ drawings was used.
 
 Although both [SymPy](https://www.sympy.org/) and [NumPy](https://numpy.org/)
 were used, the focus was on SymPy due to its nature of symbolic
@@ -54,7 +54,9 @@ some considerable aspects. The final option was [PyQt5](https://www.riverbankcom
 which is a Python binding for the [Qt](https://www.qt.io/)
 cross-platform framework. Basically utilizing all of the powerful
 aspects of the Qt framework, which avoid the aforementioned
-limitations, while maintain a usable toolkit.
+limitations, while maintain a usable toolkit. A highly programmable
+interface that is easily integrable into other environments was the
+product of this decision.
 
 ## Usage
 

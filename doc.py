@@ -1,14 +1,15 @@
 from __future__ import division
-from sympy import cos, exp, integrate, sqrt, diff, limit, Limit, oo, \
-    simplify, factor, trigsimp, Derivative, dsolve, Function, symbols, \
-    Eq, solve, sympify
+from sympy import integrate, sqrt, diff, limit, Limit, oo, simplify, factor, \
+        trigsimp, Eq, solve, sympify
+
 # from sympy.integrals.manualintegrate import manualintegrate, integral_steps
-from sympy.integrals.risch import NonElementaryIntegral
+# from sympy.integrals.risch import NonElementaryIntegral
 from sympy.abc import x
 from sympy.printing import latex
 
-from pylatex import Document, Section, Subsection, Math, TikZ, Axis, \
-    Plot, Figure, Matrix, Alignat, Command, Center
+from pylatex import Document, TikZ, Axis, Plot, Alignat, Command, Center
+# Section, Subsection, Math, Figure, Matrix,
+
 from pylatex.utils import NoEscape
 
 
@@ -101,7 +102,19 @@ class MathDoc(Document):
             agn.append(r'x=') if x_ else None
             agn.append(latex(solution))
 
-    def Plot(self, equation, height='6cm', width='6cm',
+    def Eval(self, equation):
+        from numpy import sin, cos, tan, exp, log, log10, pi, sqrt, arcsin, \
+                arccos, arctan
+
+        solution = eval(equation.replace('^', '**'))
+        equation = sympify(equation, evaluate=False)
+        # solution = eval(equation)
+        with self.create(Alignat(numbering=True, escape=False)) as agn:
+            agn.append(latex(equation))
+            agn.append(r'=')
+            agn.append(latex(solution))
+
+    def Plot(self, equation, height = '6cm', width = '6cm',
              grid='both', axis_lines='middle'):
         with self.create(Center()):
             with self.create(TikZ()):
@@ -119,11 +132,16 @@ if __name__ == '__main__':
     doc.Inte(x/sqrt(1-3*x))
     doc.Inte(1/sqrt(1-3*x))
     doc.Inte(x**x)
-    doc.Diff(x**x)
-    doc.Diff(x**x, 2)
-    doc.Diff(x**(1/x), 2)
+    doc.Diff('x**x')
+    doc.Diff('x**x, 2')
+    doc.Diff('x**(1/x), 2')
     doc.Lim(1/x, oo)
     doc.Sol('x+3=1')
     doc.Sol('x+3>1')
+    doc.Eval('2^2')
+    doc.Eval('sqrt(2)')
+    doc.Eval('sin(2)')
+    doc.Eval('sin(45/cos(3))')
+    # doc.Eval('(3i+5)-(10i+5)')
 
     doc.generate_pdf(file_name, clean_tex=True)

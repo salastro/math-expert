@@ -32,6 +32,8 @@ if __name__ == "__main__":
         ui.expTxt.toPlainText()))  # factorize button
     ui.plotBt.clicked.connect(lambda: math_doc.Plot(
         (ui.expTxt.toPlainText())))  # The plot button.
+    ui.evalBt.clicked.connect(lambda: math_doc.Eval(
+        (ui.expTxt.toPlainText())))  # Evaulate button.
     ui.genPdfBt.clicked.connect(lambda: math_doc.GenPdf(ui.fileTxt.toPlainText(
         ), ui.titleTxt.toPlainText(), ui.authorTxt.toPlainText(),
         clean_tex=True))  # The generate pdf button.

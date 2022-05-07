@@ -1,6 +1,6 @@
 from __future__ import division
 from sympy import integrate, sqrt, diff, limit, Limit, oo, simplify, factor, \
-        trigsimp, Eq, solve, sympify
+        trigsimp, Eq, solve, sympify, Derivative
 
 # from sympy.integrals.manualintegrate import manualintegrate, integral_steps
 # from sympy.integrals.risch import NonElementaryIntegral
@@ -52,11 +52,8 @@ class MathDoc(Document):
         solution = equation
         for _ in range(n):
             solution = simplify(diff(solution, x))
+            equation = Derivative(equation, x)
         with self.create(Alignat(numbering=True, escape=False)) as agn:
-            if n == 1:
-                agn.append(r'\frac{d}{dx}')
-            else:
-                agn.append(r'\frac{d^'+str(n)+'}{dx^'+str(n)+'}')
             agn.append(latex(equation))
             agn.append(r'=')
             agn.append(latex(solution))

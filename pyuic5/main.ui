@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>567</width>
-    <height>636</height>
+    <height>638</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,108 +15,16 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="4" column="0" colspan="2">
-     <widget class="QPlainTextEdit" name="fileTxt">
-      <property name="font">
-       <font>
-        <pointsize>11</pointsize>
-       </font>
-      </property>
-      <property name="plainText">
-       <string>MathDocument</string>
-      </property>
-     </widget>
-    </item>
-    <item row="10" column="0">
-     <widget class="QLabel" name="label_2">
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Calculus</string>
-      </property>
-     </widget>
-    </item>
-    <item row="16" column="1">
-     <widget class="QPushButton" name="plotBt">
+    <item row="22" column="0">
+     <widget class="QPushButton" name="genPdfBt">
       <property name="font">
        <font>
         <pointsize>10</pointsize>
        </font>
       </property>
       <property name="text">
-       <string>Plot</string>
+       <string>Generate PDF</string>
       </property>
-     </widget>
-    </item>
-    <item row="22" column="1">
-     <widget class="QPushButton" name="genLatexBt">
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Generate LaTeX</string>
-      </property>
-     </widget>
-    </item>
-    <item row="10" column="1">
-     <widget class="QLabel" name="label_5">
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Algebra</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="0" colspan="2">
-     <widget class="QPlainTextEdit" name="expTxt">
-      <property name="font">
-       <font>
-        <pointsize>11</pointsize>
-       </font>
-      </property>
-      <property name="plainText">
-       <string>(sin(x)^2-cos(x)^2)/(cos(x)^2*sin(x)^2)</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QFrame" name="frame">
-      <property name="styleSheet">
-       <string notr="true">border:0;</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-      <widget class="QLabel" name="label_7">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>91</width>
-         <height>91</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap>../logo.jpg</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
-       </property>
-      </widget>
      </widget>
     </item>
     <item row="5" column="0" colspan="2">
@@ -143,42 +51,15 @@
       </property>
      </widget>
     </item>
-    <item row="11" column="0">
-     <widget class="QPushButton" name="diffBt">
+    <item row="22" column="1">
+     <widget class="QPushButton" name="genLatexBt">
       <property name="font">
        <font>
         <pointsize>10</pointsize>
        </font>
       </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
       <property name="text">
-       <string>Differentiate</string>
-      </property>
-     </widget>
-    </item>
-    <item row="14" column="1">
-     <widget class="QLabel" name="label_6">
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Graphics</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="0" colspan="2">
-     <widget class="QPlainTextEdit" name="authorTxt">
-      <property name="font">
-       <font>
-        <pointsize>11</pointsize>
-       </font>
-      </property>
-      <property name="plainText">
-       <string>Marawan, SalahDin, Younis</string>
+       <string>Generate LaTeX</string>
       </property>
      </widget>
     </item>
@@ -194,28 +75,27 @@
       </property>
      </widget>
     </item>
-    <item row="22" column="0">
-     <widget class="QPushButton" name="genPdfBt">
+    <item row="16" column="1">
+     <widget class="QPushButton" name="plotBt">
       <property name="font">
        <font>
         <pointsize>10</pointsize>
        </font>
       </property>
       <property name="text">
-       <string>Generate PDF</string>
+       <string>Plot</string>
       </property>
      </widget>
     </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="label_4">
+    <item row="6" column="0" colspan="2">
+     <widget class="QPlainTextEdit" name="authorTxt">
       <property name="font">
        <font>
         <pointsize>11</pointsize>
-        <italic>true</italic>
        </font>
       </property>
-      <property name="text">
-       <string>Let me do your work</string>
+      <property name="plainText">
+       <string>Marawan, SalahDin, Younis</string>
       </property>
      </widget>
     </item>
@@ -232,15 +112,48 @@
       </property>
      </widget>
     </item>
-    <item row="12" column="1">
-     <widget class="QPushButton" name="factBt">
+    <item row="1" column="1">
+     <widget class="QFrame" name="frame">
+      <property name="styleSheet">
+       <string notr="true">border:0;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="label_7">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>0</y>
+         <width>81</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap>../img/logo1.jpeg</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="label_4">
       <property name="font">
        <font>
-        <pointsize>10</pointsize>
+        <pointsize>11</pointsize>
+        <italic>true</italic>
        </font>
       </property>
       <property name="text">
-       <string>Factorize</string>
+       <string>Let me do your work</string>
       </property>
      </widget>
     </item>
@@ -256,7 +169,101 @@
       </property>
      </widget>
     </item>
-    <item row="14" column="0">
+    <item row="7" column="0" colspan="2">
+     <widget class="QPlainTextEdit" name="expTxt">
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+      <property name="plainText">
+       <string>(sin(x)^2-cos(x)^2)/(cos(x)^2*sin(x)^2)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="14" column="1">
+     <widget class="QLabel" name="label_6">
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Graphics</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="1">
+     <widget class="QLabel" name="label_5">
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Algebra</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="0">
+     <widget class="QLabel" name="label_2">
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Calculus</string>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="0">
+     <widget class="QPushButton" name="diffBt">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>Differentiate</string>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="1">
+     <widget class="QPushButton" name="factBt">
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Factorize</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0" colspan="2">
+     <widget class="QPlainTextEdit" name="fileTxt">
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+      <property name="plainText">
+       <string>MathDocument</string>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="1">
+     <widget class="QPushButton" name="solBt">
+      <property name="text">
+       <string>Solve for X</string>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="0">
      <widget class="QPushButton" name="limBt">
       <property name="font">
        <font>
@@ -265,18 +272,6 @@
       </property>
       <property name="text">
        <string>Limit</string>
-      </property>
-     </widget>
-    </item>
-    <item row="16" column="0">
-     <widget class="QPushButton" name="pushButton">
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Solve ODE</string>
       </property>
      </widget>
     </item>

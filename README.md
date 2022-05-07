@@ -122,6 +122,7 @@ aliens will understand the paradigms of this code.
 * Programmable
 
 ### Disadvantages
+* poor error handling
 * limited syntax input
 * limited operations
 * no-preview before add

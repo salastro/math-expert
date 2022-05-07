@@ -16,7 +16,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(567, 667)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("pyuic5/../media/logo2.jpeg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(":/newPrefix/media/logo2.jpeg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setAutoFillBackground(False)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -38,7 +38,7 @@ class Ui_MainWindow(object):
         self.label_7 = QtWidgets.QLabel(self.frame)
         self.label_7.setGeometry(QtCore.QRect(80, 0, 81, 71))
         self.label_7.setText("")
-        self.label_7.setPixmap(QtGui.QPixmap("pyuic5/../media/logo1.jpeg"))
+        self.label_7.setPixmap(QtGui.QPixmap(":/newPrefix/media/logo1.jpeg"))
         self.label_7.setScaledContents(True)
         self.label_7.setObjectName("label_7")
         self.gridLayout.addWidget(self.frame, 1, 1, 1, 1)
@@ -196,13 +196,4 @@ class Ui_MainWindow(object):
         self.limBt.setText(_translate("MainWindow", "Limit"))
         self.evalBt.setText(_translate("MainWindow", "Evaluate"))
         self.actionNew.setText(_translate("MainWindow", "New"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
+import media_rc

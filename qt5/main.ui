@@ -14,8 +14,8 @@
    <string>Math Expert</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>../media/logo2.jpeg</normaloff>../media/logo2.jpeg</iconset>
+   <iconset resource="media.qrc">
+    <normaloff>:/newPrefix/media/logo2.jpeg</normaloff>:/newPrefix/media/logo2.jpeg</iconset>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
@@ -61,7 +61,7 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>../media/logo1.jpeg</pixmap>
+        <pixmap resource="media.qrc">:/newPrefix/media/logo1.jpeg</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -315,6 +315,8 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="media.qrc"/>
+ </resources>
  <connections/>
 </ui>

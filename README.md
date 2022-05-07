@@ -111,6 +111,29 @@ Declarative, or any other programming paradigm known to human kind. Only
 aliens will understand the paradigms of this code.
 -->
 
+## Properties
+
+### Advantages
+* Easy-to-use
+* Fast
+* Accurate
+* Concise Formatting
+* Extensible
+* Programmable
+
+### Disadvantages
+* limited syntax input
+* limited operations
+* no-preview before add
+* undoable actions
+
+### Neutral
+* Unappealing UI
+* No indication when unsolvable
+
+## Feature plans
+See [issues](https://github.com/salastro/math-expert/issues)
+
 ## Usage
 
 Although the interface is obvious, some clarifications may need to be

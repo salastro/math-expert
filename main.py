@@ -18,25 +18,25 @@ if __name__ == "__main__":
     # Setup the document and buttons.
     math_doc = MathDoc()  # The document.
     ui.inteBt.clicked.connect(lambda: math_doc.Inte(
-        sympify(ui.expTxt.toPlainText())))  # Integral button.
+        sympify(ui.expTxt.toPlainText().replace(' ', ''))))
     ui.diffBt.clicked.connect(lambda: math_doc.Diff(
-        ui.expTxt.toPlainText()))  # Derivative button.
+        ui.expTxt.toPlainText().replace(' ', '')))
     ui.limBt.clicked.connect(lambda: math_doc.Lim(
-        sympify(ui.expTxt.toPlainText().split(',')[0]),
-        sympify(ui.expTxt.toPlainText().split(',')[1])))  # Limit button.
+        sympify(ui.expTxt.toPlainText().replace(' ', '').split(',')[0]),
+        sympify(ui.expTxt.toPlainText().replace(' ', '').split(',')[1])))
     ui.simpBt.clicked.connect(lambda: math_doc.Simp(
-        sympify(ui.expTxt.toPlainText())))  # simplfiy button
+        sympify(ui.expTxt.toPlainText().replace(' ', ''))))
     ui.factBt.clicked.connect(lambda: math_doc.Fact(
-        sympify(ui.expTxt.toPlainText())))  # factorize button
+        sympify(ui.expTxt.toPlainText().replace(' ', ''))))
     ui.solBt.clicked.connect(lambda: math_doc.Sol(
-        ui.expTxt.toPlainText()))  # factorize button
+        ui.expTxt.toPlainText().replace(' ', '')))
     ui.plotBt.clicked.connect(lambda: math_doc.Plot(
-        (ui.expTxt.toPlainText())))  # The plot button.
+        (ui.expTxt.toPlainText().replace(' ', ''))))
     ui.evalBt.clicked.connect(lambda: math_doc.Eval(
-        (ui.expTxt.toPlainText())))  # Evaulate button.
+        (ui.expTxt.toPlainText().replace(' ', ''))))
     ui.genPdfBt.clicked.connect(lambda: math_doc.GenPdf(ui.fileTxt.toPlainText(
         ), ui.titleTxt.toPlainText(), ui.authorTxt.toPlainText(),
-        clean_tex=True))  # The generate pdf button.
+        clean_tex=True))
     ui.genLatexBt.clicked.connect(lambda: math_doc.GenTex(ui.fileTxt.toPlainText(
         ), ui.titleTxt.toPlainText(),
         ui.authorTxt.toPlainText()))  # The generate tex button.

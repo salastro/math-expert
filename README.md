@@ -35,6 +35,7 @@ paradigm known to human kind. Only aliens will understand the paradigms of this
 code.
 
 ## COCOMO estimations
+***Using [scc](https://github.com/boyter/scc)***
 ```
 ───────────────────────────────────────────────────────────────────────────────
 Language                 Files     Lines   Blanks  Comments     Code Complexity

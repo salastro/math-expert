@@ -1,6 +1,9 @@
 # Math Expert
 *Let me do your work*
 
+## Preview
+<video src="media/preview.mp4" width="100%"></video>
+
 ## Introduction
 **Math Expert** is our (@salastro, @younis-tarek, @marawn-mogeb) math high
 school graduation project. The project tackles the problem of generating

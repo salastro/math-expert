@@ -1,6 +1,7 @@
 from __future__ import division
 from sympy import cos, exp, integrate, sqrt, diff, limit, Limit, oo, \
-    simplify, factor, trigsimp, Derivative, dsolve, Function, symbols, Eq
+    simplify, factor, trigsimp, Derivative, dsolve, Function, symbols, \
+    Eq, solve, sympify
 # from sympy.integrals.manualintegrate import manualintegrate, integral_steps
 from sympy.integrals.risch import NonElementaryIntegral
 from sympy.abc import x
@@ -32,9 +33,6 @@ class MathDoc(Document):
 
     def Inte(self, equation):
         solution = trigsimp(simplify(integrate(equation, x)))
-        if isinstance(integrate(equation.rewrite(cos, exp), x, risch=True),
-                      NonElementaryIntegral):
-            solution = 'Non-elementary'
         with self.create(Alignat(numbering=True, escape=False)) as agn:
             agn.append(r'\int')
             agn.append(latex(equation))
@@ -77,6 +75,26 @@ class MathDoc(Document):
             agn.append(r'=')
             agn.append(latex(solution))
 
+    def Sol(self, equation):
+        if '=' in equation:
+            eq = equation.split('=')
+            solution = solve(Eq(sympify(eq[0]), sympify(eq[1])))
+            x_ = True
+        else:
+            equation = sympify(equation)
+            solution = solve(sympify(equation))
+            x_ = False
+        with self.create(Alignat(numbering=True, escape=False)) as agn:
+            if not x_:
+                agn.append(latex(equation))
+            else:
+                agn.append(latex(sympify(eq[0])))
+                agn.append(r'=')
+                agn.append(latex(sympify(eq[1])))
+            agn.append(r'\Rightarrow')
+            agn.append(r'x=') if x_ else None
+            agn.append(latex(solution))
+
     def Plot(self, equation, height='6cm', width='6cm',
              grid='both', axis_lines='middle'):
         with self.create(Center()):
@@ -99,5 +117,7 @@ if __name__ == '__main__':
     doc.Diff(x**x, 2)
     doc.Diff(x**(1/x), 2)
     doc.Lim(1/x, oo)
+    doc.Sol('x+3=1')
+    doc.Sol('x+3>1')
 
     doc.generate_pdf(file_name, clean_tex=True)

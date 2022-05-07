@@ -7,31 +7,41 @@
 https://user-images.githubusercontent.com/63563250/167239624-4faf126e-fd08-49f9-87df-b7820664ca6c.mp4
 
 ## Introduction
+
 **Math Expert** is our ([@salastro](https://github.com/salastro), [@younis-tarek](https://github.com/younis-tarek),
 [@marawn-mogeb](https://github.com/marawan-mogeb)) math high school
 graduation project. The project tackles the problem of generating
 beautiful, quick, and useful mathematics. While most software can either
-only generate beautiful formatted PDF (i.e. LaTeX) or sufficiently solve
-mathematical problems (e.g. Wolfram|alpha). There may be, however,
-alternatives to these tools, yet they can not fully grasp the potential
-of either of them or are slow and hard-to-use. Therefore, this project
-tries to do what other failed in.
+only generate beautiful formatted PDF (i.e. [LaTeX](https://www.latex-project.org/))
+or sufficiently solve mathematical problems (e.g. [Wolfram|Alpha](https://wolframalpha.com/)).
+There may be, however, alternatives to these tools, yet they can not
+fully grasp the potential of either of them or are slow and hard-to-use.
+Therefore, this project tries to do what other failed in.
+
+## Inner Workings
 
 Our approach was to create an easy to use graphical user interface (GUI)
 that uses different components to reach our goal. LaTeX is the main PDF
 generation backend due to its indubitable abilities and speed; it is the
 universal standard for mathematical notation. However, it is reasonably
 hard to use making it difficult to use in a short-term practical
-context. This makes the done application even more useful.
+context. This makes the done application even more useful. It was mainly
+interacted with through [PyLaTeX](https://jeltef.github.io/PyLaTeX/); it
+provides a usable set of commands that make use of LaTeX's capabilities.
+
+Although both [SymPy](https://www.sympy.org/) and [NumPy](https://numpy.org/)
+were used, the focus was on SymPy due to the symbolic focus of the
+project. The latter is powerful in mathematical evaluations, which
+— although supported — is not the focus of this project.
 
 ## Dependences
-### Build
+### Building
 * [Python](https://www.python.org/) 3.10:
     * [PyLaTeX](https://jeltef.github.io/PyLaTeX/) 1.4
     * [SymPy](https://www.sympy.org/) 1.10
     * [NumPy](https://numpy.org/) 1.22
     * [PyQt5](https://www.riverbankcomputing.com/software/pyqt/) 5.15
-### Usage
+### Running
 [LaTeX](https://www.latex-project.org/) (see https://github.com/salastro/math-expert/issues/9)
 
 ## Philosophy

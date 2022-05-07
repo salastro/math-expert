@@ -58,32 +58,6 @@ limitations, while maintaining a usable toolkit. A highly programmable
 interface that is easily integrable into other environments was the
 product of this decision.
 
-## Usage
-
-Although the interface is obvious, some clarifications may need to be
-made.
-* First text input is the file name without extension
-* Second text input is the document title
-* Third text input is the author(s) title
-* Fourth (and last) text input is the mathematical expression to be
-  operated on
-    * Euler's number should be written as `exp(x)` instead of `e^(x)`
-    * `log` is the natural logarithm.
-    * Multiplication should be written in the form `2*x`
-* After defining all the previous inputs, click *Generate PDF*
-* Choose the type of operation you want to perform, then click *Generate
-  PDF* again
-
-## Dependences
-### Building
-* [Python](https://www.python.org/) 3.10:
-    * [PyLaTeX](https://jeltef.github.io/PyLaTeX/) 1.4
-    * [SymPy](https://www.sympy.org/) 1.10
-    * [NumPy](https://numpy.org/) 1.22
-    * [PyQt5](https://www.riverbankcomputing.com/software/pyqt/) 5.15
-### Running
-[LaTeX](https://www.latex-project.org/) (see https://github.com/salastro/math-expert/issues/9)
-
 ## Philosophy
 
 Although the infamous *[it just works](https://www.zdnet.com/article/apple-seems-to-have-forgotten-about-the-whole-it-just-works-thing/)*
@@ -137,6 +111,32 @@ Declarative, or any other programming paradigm known to human kind. Only
 aliens will understand the paradigms of this code.
 -->
 
+## Usage
+
+Although the interface is obvious, some clarifications may need to be
+made.
+* First text input is the file name without extension
+* Second text input is the document title
+* Third text input is the author(s) title
+* Fourth (and last) text input is the mathematical expression to be
+  operated on
+    * Euler's number should be written as `exp(x)` instead of `e^(x)`
+    * `log` is the natural logarithm.
+    * Multiplication should be written in the form `2*x`
+* After defining all the previous inputs, click *Generate PDF*
+* Choose the type of operation you want to perform, then click *Generate
+  PDF* again
+
+## Dependences
+### Building
+* [Python](https://www.python.org/) 3.10:
+    * [PyLaTeX](https://jeltef.github.io/PyLaTeX/) 1.4
+    * [SymPy](https://www.sympy.org/) 1.10
+    * [NumPy](https://numpy.org/) 1.22
+    * [PyQt5](https://www.riverbankcomputing.com/software/pyqt/) 5.15
+### Running
+[LaTeX](https://www.latex-project.org/) (see https://github.com/salastro/math-expert/issues/9)
+
 ## [COCOMO](https://en.wikipedia.org/wiki/COCOMO) estimations
 ***Using [scc](https://github.com/boyter/scc)***
 ```
@@ -153,5 +153,4 @@ Estimated People Required (organic) 0.347520
 ───────────────────────────────────────────────────────────────────────────────
 Processed 16605 bytes, 0.017 megabytes (SI)
 ───────────────────────────────────────────────────────────────────────────────
-
 ```

@@ -1,3 +1,4 @@
+<!-- vim:set et sw=4 ts=4 tw=72: -->
 # Math Expert
 *Let me do your work*
 
@@ -7,13 +8,21 @@ https://user-images.githubusercontent.com/63563250/167239624-4faf126e-fd08-49f9-
 
 ## Introduction
 **Math Expert** is our ([@salastro](https://github.com/salastro), [@younis-tarek](https://github.com/younis-tarek),
-[@marawn-mogeb](https://github.com/marawan-mogeb)) math high school graduation
-project. The project tackles the problem of generating beautiful, quick, and
-useful mathematics. While most software can either only generate beautiful
-formatted PDF (i.e. LaTeX) or sufficiently solve mathematical problems (e.g.
-Wolfram|alpha). There may be, however, alternatives to these tools, yet they
-can not fully grasp the potential of either of them or are slow and
-hard-to-use. Therefore, this project tries to do what other failed in.
+[@marawn-mogeb](https://github.com/marawan-mogeb)) math high school
+graduation project. The project tackles the problem of generating
+beautiful, quick, and useful mathematics. While most software can either
+only generate beautiful formatted PDF (i.e. LaTeX) or sufficiently solve
+mathematical problems (e.g. Wolfram|alpha). There may be, however,
+alternatives to these tools, yet they can not fully grasp the potential
+of either of them or are slow and hard-to-use. Therefore, this project
+tries to do what other failed in.
+
+Our approach was to create an easy to use graphical user interface (GUI)
+that uses different components to reach our goal. LaTeX is the main PDF
+generation backend due to its indubitable abilities and speed; it is the
+universal standard for mathematical notation. However, it is reasonably
+hard to use making it difficult to use in a short-term practical
+context. This makes the done application even more useful.
 
 ## Dependences
 ### Build
@@ -26,13 +35,14 @@ hard-to-use. Therefore, this project tries to do what other failed in.
 [LaTeX](https://www.latex-project.org/) (see https://github.com/salastro/math-expert/issues/9)
 
 ## Philosophy
-It follows the *just works* philosophy and focuses on getting stuff done. The
-code base is so bad that we could be paid not to work on it. There is no clear
-structure followed. Sometimes you fill find patterns that is clear crystal, yet
-they are avoided to make a worse codebase. We do not believe in: OO,
-Functional, Array, Prototype, Procedural, Declarative, or any other programming
-paradigm known to human kind. Only aliens will understand the paradigms of this
-code.
+
+It follows the *just works* philosophy and focuses on getting stuff
+done. The code base is so bad that we could be paid not to work on it.
+There is no clear structure followed. Sometimes you fill find patterns
+that is clear crystal, yet they are avoided to make a worse codebase. We
+do not believe in: OO, Functional, Array, Prototype, Procedural,
+Declarative, or any other programming paradigm known to human kind. Only
+aliens will understand the paradigms of this code.
 
 ## COCOMO estimations
 ***Using [scc](https://github.com/boyter/scc)***

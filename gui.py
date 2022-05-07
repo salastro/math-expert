@@ -88,7 +88,7 @@ class Ui_MainWindow(object):
         self.label_7 = QtWidgets.QLabel(self.frame)
         self.label_7.setGeometry(QtCore.QRect(80, 0, 81, 71))
         self.label_7.setText("")
-        self.label_7.setPixmap(QtGui.QPixmap("pyuic5/../img/logo1.jpeg"))
+        self.label_7.setPixmap(QtGui.QPixmap("pyuic5/../media/logo1.jpeg"))
         self.label_7.setScaledContents(True)
         self.label_7.setObjectName("label_7")
         self.gridLayout.addWidget(self.frame, 1, 1, 1, 1)

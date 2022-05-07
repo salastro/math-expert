@@ -23,7 +23,7 @@ failed in.
     * [NumPy](https://numpy.org/) 1.22
     * [PyQt5](https://www.riverbankcomputing.com/software/pyqt/) 5.15
 ### Usage
-LaTeX (see #9)
+[LaTeX](https://www.latex-project.org/) (see https://github.com/salastro/math-expert/issues/9)
 
 ## Philosophy
 It follows the *just works* philosophy and focuses on getting stuff done. The

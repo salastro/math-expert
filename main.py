@@ -20,7 +20,7 @@ if __name__ == "__main__":
     ui.inteBt.clicked.connect(lambda: math_doc.Inte(
         sympify(ui.expTxt.toPlainText())))  # Integral button.
     ui.diffBt.clicked.connect(lambda: math_doc.Diff(
-        sympify(ui.expTxt.toPlainText())))  # Derivative button.
+        ui.expTxt.toPlainText()))  # Derivative button.
     ui.limBt.clicked.connect(lambda: math_doc.Lim(
         sympify(ui.expTxt.toPlainText().split(',')[0]),
         sympify(ui.expTxt.toPlainText().split(',')[1])))  # Limit button.

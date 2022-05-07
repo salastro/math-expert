@@ -42,6 +42,12 @@ class MathDoc(Document):
             agn.append(r'+C')
 
     def Diff(self, equation, n=1):
+        if ',' in equation:
+            eq = equation.split(',')
+            equation = sympify(eq[0])
+            n = int(eq[1])
+        else:
+            equation = sympify(equation)
         solution = equation
         for _ in range(n):
             solution = simplify(diff(solution, x))

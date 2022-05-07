@@ -6,14 +6,14 @@
 https://user-images.githubusercontent.com/63563250/167239624-4faf126e-fd08-49f9-87df-b7820664ca6c.mp4
 
 ## Introduction
-**Math Expert** is our (@salastro, @younis-tarek, @marawn-mogeb) math high
-school graduation project. The project tackles the problem of generating
-beautiful, quick, and useful mathematics. While most software can either only
-generate beautiful formatted PDF (i.e. LaTeX) or sufficiently solve
-mathematical problems (e.g. Wolfram|alpha). There may be, however, alternatives
-to these tools, yet they can not fully grasp the potential of either of them
-or are slow and hard-to-use. Therefore, this project tries to do what other
-failed in.
+**Math Expert** is our ([@salastro](https://github.com/salastro), [@younis-tarek](https://github.com/younis-tarek),
+[@marawn-mogeb](https://github.com/marawan-mogeb)) math high school graduation
+project. The project tackles the problem of generating beautiful, quick, and
+useful mathematics. While most software can either only generate beautiful
+formatted PDF (i.e. LaTeX) or sufficiently solve mathematical problems (e.g.
+Wolfram|alpha). There may be, however, alternatives to these tools, yet they
+can not fully grasp the potential of either of them or are slow and
+hard-to-use. Therefore, this project tries to do what other failed in.
 
 ## Dependences
 ### Build

@@ -15,6 +15,16 @@ to these tools, yet they can not fully grasp the potential of either of them
 or are slow and hard-to-use. Therefore, this project tries to do what other
 failed in.
 
+## Dependences
+### Build
+* [Python](https://www.python.org/) 3.10:
+    * [PyLaTeX](https://jeltef.github.io/PyLaTeX/) 1.4
+    * [SymPy](https://www.sympy.org/) 1.10
+    * [NumPy](https://numpy.org/) 1.22
+    * [PyQt5](https://www.riverbankcomputing.com/software/pyqt/) 5.15
+### Usage
+LaTeX (see #9)
+
 ## Philosophy
 It follows the *just works* philosophy and focuses on getting stuff done. The
 code base is so bad that we could be paid not to work on it. There is no clear

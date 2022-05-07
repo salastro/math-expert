@@ -1,5 +1,6 @@
+from __future__ import division
 from sympy import cos, exp, integrate, sqrt, diff, limit, Limit, oo, \
-    simplify, factor, trigsimp
+    simplify, factor, trigsimp, Derivative, dsolve, Function, symbols, Eq
 # from sympy.integrals.manualintegrate import manualintegrate, integral_steps
 from sympy.integrals.risch import NonElementaryIntegral
 from sympy.abc import x

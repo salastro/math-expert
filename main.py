@@ -1,12 +1,10 @@
+from __future__ import division
 from doc import MathDoc
-from sympy import sin, cos, tan, exp, log, sqrt, sympify, pi, oo, \
-    symbols, asin, acos, atan  # common math
-from sympy import Function
+from sympy import sin, cos, tan, exp, log, ln, sqrt, sympify, pi, oo, \
+    symbols, asin, acos, atan, cot, csc, sec  # common math
+from sympy import Function, Derivative, Eq, dsolve
+from sympy.abc import x
 from gui import QtWidgets, Ui_MainWindow  # gui
-
-# common symbols
-x, y, z, t = symbols('x y z t')
-f, g, h = symbols('f g h', cls=Function)
 
 
 if __name__ == "__main__":
@@ -35,10 +33,10 @@ if __name__ == "__main__":
     ui.plotBt.clicked.connect(lambda: math_doc.Plot(
         (ui.expTxt.toPlainText())))  # The plot button.
     ui.genPdfBt.clicked.connect(lambda: math_doc.GenPdf(ui.fileTxt.toPlainText(
-    ), ui.titleTxt.toPlainText(), ui.authorTxt.toPlainText(), clean_tex=True))
-    # The generate pdf button.
+        ), ui.titleTxt.toPlainText(), ui.authorTxt.toPlainText(),
+        clean_tex=True))  # The generate pdf button.
     ui.genLatexBt.clicked.connect(lambda: math_doc.GenTex(ui.fileTxt.toPlainText(
-    ), ui.titleTxt.toPlainText(), ui.authorTxt.toPlainText()))
+        ), ui.titleTxt.toPlainText(), ui.authorTxt.toPlainText()))
     # The generate tex button.
 
     MainWindow.show()

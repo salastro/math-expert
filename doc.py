@@ -60,15 +60,10 @@ class MathDoc(Document):
     def Lim(self, equation):
         eq = equation.split(',')
         match len(eq):
-            case 1:
-                solution = limit(equation, x, 0)
-                show, a, s = equation, 0, '+'
-            case 2:
-                solution = limit(sympify(eq[0]), x, sympify(eq[1]))
-                show, a, s = eq[0], eq[1], eq[2]
-            case 3:
-                solution = limit(sympify(eq[0]), x, sympify(eq[1]), eq[2])
-                show, a, s = eq[0], eq[1], eq[2]
+            case 1: show, a, s = equation, 0,     '+'
+            case 2: show, a, s = eq[0],    eq[1], '+'
+            case 3: show, a, s = eq[0],    eq[1], eq[2]
+        solution = limit(sympify(show), x, sympify(a), s)
         print(eq, solution, show, sep='\n')
         with self.create(Alignat(numbering=True, escape=False)) as agn:
             agn.append(latex(Limit(show, x, a, s)))
@@ -121,7 +116,7 @@ class MathDoc(Document):
             agn.append(r'=')
             agn.append(latex(solution))
 
-    def Plot(self, equation, height = '6cm', width = '6cm',
+    def Plot(self, equation, height='6cm', width='6cm',
              grid='both', axis_lines='middle'):
         with self.create(Center()):
             with self.create(TikZ()):

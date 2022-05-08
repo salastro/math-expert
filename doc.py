@@ -39,12 +39,13 @@ class MathDoc(Document):
         print(equation, solution)
         if equation == solution:
             solution = "No computable integral"
+            solvable = False
             print("no computable integral")
         with self.create(Alignat(numbering=True, escape=False)) as agn:
             agn.append(latex(equation))
             agn.append(r'=')
             agn.append(latex(solution))
-            agn.append(r'+C')
+            agn.append(r'+C') if solvable else None
 
     def Diff(self, equation):
         eq = equation.split(',')
@@ -112,7 +113,6 @@ class MathDoc(Document):
     def Eval(self, equation):
         from numpy import sin, cos, tan, exp, log, log10, pi, sqrt, arcsin, \
                 arccos, arctan
-
         solution = eval(equation.replace('^', '**'))
         equation = sympify(equation, evaluate=False)
         # solution = eval(equation)

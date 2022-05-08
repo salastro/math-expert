@@ -57,10 +57,21 @@ class MathDoc(Document):
             agn.append(r'=')
             agn.append(latex(solution))
 
-    def Lim(self, equation, a=0):
-        solution = limit(equation, x, a)
+    def Lim(self, equation):
+        eq = equation.split(',')
+        match len(eq):
+            case 1:
+                solution = limit(equation, x, 0)
+                show, a, s = equation, 0, '+'
+            case 2:
+                solution = limit(sympify(eq[0]), x, sympify(eq[1]))
+                show, a, s = eq[0], eq[1], eq[2]
+            case 3:
+                solution = limit(sympify(eq[0]), x, sympify(eq[1]), eq[2])
+                show, a, s = eq[0], eq[1], eq[2]
+        print(eq, solution, show, sep='\n')
         with self.create(Alignat(numbering=True, escape=False)) as agn:
-            agn.append(latex(Limit(equation, x, a)))
+            agn.append(latex(Limit(show, x, a, s)))
             agn.append(r'=')
             agn.append(latex(solution))
 

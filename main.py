@@ -22,8 +22,7 @@ if __name__ == "__main__":
     ui.diffBt.clicked.connect(lambda: math_doc.Diff(
         ui.expTxt.toPlainText().replace(' ', '')))
     ui.limBt.clicked.connect(lambda: math_doc.Lim(
-        sympify(ui.expTxt.toPlainText().replace(' ', '').split(',')[0]),
-        sympify(ui.expTxt.toPlainText().replace(' ', '').split(',')[1])))
+        ui.expTxt.toPlainText().replace(' ', '')))
     ui.simpBt.clicked.connect(lambda: math_doc.Simp(
         sympify(ui.expTxt.toPlainText().replace(' ', ''))))
     ui.factBt.clicked.connect(lambda: math_doc.Fact(

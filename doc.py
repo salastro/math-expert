@@ -46,13 +46,10 @@ class MathDoc(Document):
             agn.append(latex(solution))
             agn.append(r'+C')
 
-    def Diff(self, equation, n=1):
-        if ',' in equation:
-            eq = equation.split(',')
-            equation = sympify(eq[0])
-            n = int(eq[1])
-        else:
-            equation = sympify(equation)
+    def Diff(self, equation):
+        eq = equation.split(',')
+        equation = sympify(eq[0])
+        n = int(eq[1]) if len(eq) == 2 else 1
         solution = equation
         for _ in range(n):
             solution = simplify(diff(solution, x))

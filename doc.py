@@ -64,6 +64,9 @@ class MathDoc(Document):
             case 2: show, a, s = eq[0],    eq[1], '+'
             case 3: show, a, s = eq[0],    eq[1], eq[2]
         solution = limit(sympify(show), x, sympify(a), s)
+        if Limit(show, x, a, s) == solution:
+            solution = "No computable limit"
+            print("no computable limit")
         print(eq, solution, show, sep='\n')
         with self.create(Alignat(numbering=True, escape=False)) as agn:
             agn.append(latex(Limit(show, x, a, s)))
@@ -134,10 +137,11 @@ if __name__ == '__main__':
     doc.Inte(x/sqrt(1-3*x))
     doc.Inte(1/sqrt(1-3*x))
     doc.Inte(x**x)
+    from sympy import sin, cos
     doc.Diff('x**x')
     doc.Diff('x**x, 2')
     doc.Diff('x**(1/x), 2')
-    doc.Lim(1/x, oo)
+    doc.Lim('2/sin(2*x),oo')
     doc.Sol('x+3=1')
     doc.Sol('x+3>1')
     doc.Eval('2^2')

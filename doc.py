@@ -34,7 +34,12 @@ class MathDoc(Document):
 
     def Inte(self, equation):
         solution = trigsimp(simplify(integrate(equation, x)))
+        # solution = integrate(trigsimp(simplify(equation)), x)
         equation = Integral(equation, x)
+        print(equation, solution)
+        if equation == solution:
+            solution = "No computable integral"
+            print("no computable integral")
         with self.create(Alignat(numbering=True, escape=False)) as agn:
             agn.append(latex(equation))
             agn.append(r'=')
@@ -134,10 +139,8 @@ if __name__ == '__main__':
     file_name = 'full'
 
     doc.Heading(title='Integral Homework', author='SalahDin Rezk')
-    doc.Inte(x/sqrt(1-3*x))
-    doc.Inte(1/sqrt(1-3*x))
-    doc.Inte(x**x)
     from sympy import sin, cos
+    doc.Inte((sin(x)**2-cos(x)**2)/(cos(x)**2*sin(x)**2))
     doc.Diff('x**x')
     doc.Diff('x**x, 2')
     doc.Diff('x**(1/x), 2')

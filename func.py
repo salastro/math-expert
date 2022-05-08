@@ -33,6 +33,7 @@ class MathDoc(Document):
         self.generate_tex(file)
 
     def Inte(self, equation):
+        solvable = True
         solution = trigsimp(simplify(integrate(equation, x)))
         # solution = integrate(trigsimp(simplify(equation)), x)
         equation = Integral(equation, x)

@@ -1,5 +1,5 @@
 from __future__ import division
-from doc import MathDoc
+from func import MathDoc
 from sympy import sin, cos, tan, exp, log, ln, sqrt, sympify, pi, oo, \
     symbols, asin, acos, atan, cot, csc, sec  # common math
 from sympy import Function, Derivative, Eq, dsolve

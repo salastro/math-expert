@@ -43,6 +43,7 @@ class MathDoc(Document):
     def Inte(self, equation):
         try:
             solvable = True
+            equation = sympify(equation)
             solution = trigsimp(simplify(integrate(equation, x)))
             # solution = integrate(trigsimp(simplify(equation)), x)
             equation = Integral(equation, x)
@@ -96,6 +97,7 @@ class MathDoc(Document):
 
     def Simp(self, equation):
         try:
+            equation = sympify(equation)
             solution = trigsimp(simplify(equation))
             with self.create(Alignat(numbering=True, escape=False)) as agn:
                 agn.append(latex(equation))
@@ -106,6 +108,7 @@ class MathDoc(Document):
 
     def Fact(self, equation):
         try:
+            equation = sympify(equation)
             solution = factor(equation)
             with self.create(Alignat(numbering=True, escape=False)) as agn:
                 agn.append(latex(equation))

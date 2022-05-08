@@ -18,15 +18,15 @@ if __name__ == "__main__":
     # Setup the document and buttons.
     math_doc = MathDoc()  # The document.
     ui.inteBt.clicked.connect(lambda: math_doc.Inte(
-        sympify(ui.expTxt.toPlainText().replace(' ', ''))))
+        ui.expTxt.toPlainText().replace(' ', '')))
     ui.diffBt.clicked.connect(lambda: math_doc.Diff(
         ui.expTxt.toPlainText().replace(' ', '')))
     ui.limBt.clicked.connect(lambda: math_doc.Lim(
         ui.expTxt.toPlainText().replace(' ', '')))
     ui.simpBt.clicked.connect(lambda: math_doc.Simp(
-        sympify(ui.expTxt.toPlainText().replace(' ', ''))))
+        ui.expTxt.toPlainText().replace(' ', '')))
     ui.factBt.clicked.connect(lambda: math_doc.Fact(
-        sympify(ui.expTxt.toPlainText().replace(' ', ''))))
+        ui.expTxt.toPlainText().replace(' ', '')))
     ui.solBt.clicked.connect(lambda: math_doc.Sol(
         ui.expTxt.toPlainText().replace(' ', '')))
     ui.plotBt.clicked.connect(lambda: math_doc.Plot(

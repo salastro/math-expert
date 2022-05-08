@@ -9,8 +9,16 @@ from sympy.printing import latex
 
 from pylatex import Document, TikZ, Axis, Plot, Alignat, Command, Center
 # Section, Subsection, Math, Figure, Matrix,
-
 from pylatex.utils import NoEscape
+from err import QtWidgets, Ui_Dialog as Form
+
+
+def error_message():
+    dialog = QtWidgets.QDialog()
+    dialog.ui = Form()
+    dialog.ui.setupUi(dialog)
+    dialog.exec_()
+    dialog.show()
 
 
 class MathDoc(Document):
@@ -33,102 +41,126 @@ class MathDoc(Document):
         self.generate_tex(file)
 
     def Inte(self, equation):
-        solvable = True
-        solution = trigsimp(simplify(integrate(equation, x)))
-        # solution = integrate(trigsimp(simplify(equation)), x)
-        equation = Integral(equation, x)
-        print(equation, solution)
-        if equation == solution:
-            solution = "No computable integral"
-            solvable = False
-            print("no computable integral")
-        with self.create(Alignat(numbering=True, escape=False)) as agn:
-            agn.append(latex(equation))
-            agn.append(r'=')
-            agn.append(latex(solution))
-            agn.append(r'+C') if solvable else None
+        try:
+            solvable = True
+            solution = trigsimp(simplify(integrate(equation, x)))
+            # solution = integrate(trigsimp(simplify(equation)), x)
+            equation = Integral(equation, x)
+            print(equation, solution)
+            if equation == solution:
+                solution = "No computable integral"
+                solvable = False
+                print("no computable integral")
+            with self.create(Alignat(numbering=True, escape=False)) as agn:
+                agn.append(latex(equation))
+                agn.append(r'=')
+                agn.append(latex(solution))
+                agn.append(r'+C') if solvable else None
+        except:
+            error_message()
 
     def Diff(self, equation):
-        eq = equation.split(',')
-        equation = sympify(eq[0])
-        n = int(eq[1]) if len(eq) == 2 else 1
-        solution = equation
-        for _ in range(n):
-            solution = simplify(diff(solution, x))
-            equation = Derivative(equation, x)
-        with self.create(Alignat(numbering=True, escape=False)) as agn:
-            agn.append(latex(equation))
-            agn.append(r'=')
-            agn.append(latex(solution))
+        try:
+            eq = equation.split(',')
+            equation = sympify(eq[0])
+            n = int(eq[1]) if len(eq) == 2 else 1
+            solution = equation
+            for _ in range(n):
+                solution = simplify(diff(solution, x))
+                equation = Derivative(equation, x)
+            with self.create(Alignat(numbering=True, escape=False)) as agn:
+                agn.append(latex(equation))
+                agn.append(r'=')
+                agn.append(latex(solution))
+        except:
+            error_message()
 
     def Lim(self, equation):
-        eq = equation.split(',')
-        match len(eq):
-            case 1: show, a, s = equation, 0,     '+'
-            case 2: show, a, s = eq[0],    eq[1], '+'
-            case 3: show, a, s = eq[0],    eq[1], eq[2]
-        solution = limit(sympify(show), x, sympify(a), s)
-        if Limit(show, x, a, s) == solution:
-            solution = "No computable limit"
-            print("no computable limit")
-        print(eq, solution, show, sep='\n')
-        with self.create(Alignat(numbering=True, escape=False)) as agn:
-            agn.append(latex(Limit(show, x, a, s)))
-            agn.append(r'=')
-            agn.append(latex(solution))
+        try:
+            eq = equation.split(',')
+            match len(eq):
+                case 1: show, a, s = equation, 0,     '+'
+                case 2: show, a, s = eq[0],    eq[1], '+'
+                case 3: show, a, s = eq[0],    eq[1], eq[2]
+            solution = limit(sympify(show), x, sympify(a), s)
+            if Limit(show, x, a, s) == solution:
+                solution = "No computable limit"
+                print("no computable limit")
+            print(eq, solution, show, sep='\n')
+            with self.create(Alignat(numbering=True, escape=False)) as agn:
+                agn.append(latex(Limit(show, x, a, s)))
+                agn.append(r'=')
+                agn.append(latex(solution))
+        except:
+            error_message()
 
     def Simp(self, equation):
-        solution = trigsimp(simplify(equation))
-        with self.create(Alignat(numbering=True, escape=False)) as agn:
-            agn.append(latex(equation))
-            agn.append(r'=')
-            agn.append(latex(solution))
+        try:
+            solution = trigsimp(simplify(equation))
+            with self.create(Alignat(numbering=True, escape=False)) as agn:
+                agn.append(latex(equation))
+                agn.append(r'=')
+                agn.append(latex(solution))
+        except:
+            error_message()
 
     def Fact(self, equation):
-        solution = factor(equation)
-        with self.create(Alignat(numbering=True, escape=False)) as agn:
-            agn.append(latex(equation))
-            agn.append(r'=')
-            agn.append(latex(solution))
+        try:
+            solution = factor(equation)
+            with self.create(Alignat(numbering=True, escape=False)) as agn:
+                agn.append(latex(equation))
+                agn.append(r'=')
+                agn.append(latex(solution))
+        except:
+            error_message()
 
     def Sol(self, equation):
-        if '=' in equation:
-            eq = equation.split('=')
-            solution = solve(Eq(sympify(eq[0]), sympify(eq[1])))
-            x_ = True
-        else:
-            equation = sympify(equation)
-            solution = solve(sympify(equation))
-            x_ = False
-        with self.create(Alignat(numbering=True, escape=False)) as agn:
-            if not x_:
-                agn.append(latex(equation))
+        try:
+            if '=' in equation:
+                eq = equation.split('=')
+                solution = solve(Eq(sympify(eq[0]), sympify(eq[1])))
+                x_ = True
             else:
-                agn.append(latex(sympify(eq[0])))
-                agn.append(r'=')
-                agn.append(latex(sympify(eq[1])))
-            agn.append(r'\Rightarrow')
-            agn.append(r'x=') if x_ else None
-            agn.append(latex(solution))
+                equation = sympify(equation)
+                solution = solve(sympify(equation))
+                x_ = False
+            with self.create(Alignat(numbering=True, escape=False)) as agn:
+                if not x_:
+                    agn.append(latex(equation))
+                else:
+                    agn.append(latex(sympify(eq[0])))
+                    agn.append(r'=')
+                    agn.append(latex(sympify(eq[1])))
+                agn.append(r'\Rightarrow')
+                agn.append(r'x=') if x_ else None
+                agn.append(latex(solution))
+        except:
+            error_message()
 
     def Eval(self, equation):
-        from numpy import sin, cos, tan, exp, log, log10, pi, sqrt, arcsin, \
-                arccos, arctan
-        solution = eval(equation.replace('^', '**'))
-        equation = sympify(equation, evaluate=False)
-        # solution = eval(equation)
-        with self.create(Alignat(numbering=True, escape=False)) as agn:
-            agn.append(latex(equation))
-            agn.append(r'=')
-            agn.append(latex(solution))
+        try:
+            from numpy import sin, cos, tan, exp, log, log10, pi, sqrt, arcsin, \
+                    arccos, arctan
+            solution = eval(equation.replace('^', '**'))
+            equation = sympify(equation, evaluate=False)
+            # solution = eval(equation)
+            with self.create(Alignat(numbering=True, escape=False)) as agn:
+                agn.append(latex(equation))
+                agn.append(r'=')
+                agn.append(latex(solution))
+        except:
+            error_message()
 
     def Plot(self, equation, height='6cm', width='6cm',
              grid='both', axis_lines='middle'):
-        with self.create(Center()):
-            with self.create(TikZ()):
-                plot_options = f'height={height}, width={width}, grid={grid}, axis lines={axis_lines}'
-                with self.create(Axis(options=plot_options)) as plot:
-                    plot.append(Plot(name=equation, func=equation))
+        try:
+            with self.create(Center()):
+                with self.create(TikZ()):
+                    plot_options = f'height={height}, width={width}, grid={grid}, axis lines={axis_lines}'
+                    with self.create(Axis(options=plot_options)) as plot:
+                        plot.append(Plot(name=equation, func=equation))
+        except:
+            error_message()
 
 
 if __name__ == '__main__':

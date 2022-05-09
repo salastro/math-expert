@@ -159,7 +159,8 @@ made.
     * [NumPy](https://numpy.org/) 1.22
     * [PyQt5](https://www.riverbankcomputing.com/software/pyqt/) 5.15
 ### Running
-[LaTeX](https://www.latex-project.org/) (see https://github.com/salastro/math-expert/issues/9)
+* [LaTeX](https://www.latex-project.org/) (see https://github.com/salastro/math-expert/issues/9)
+* [Perl](https://www.perl.org/) (see https://github.com/salastro/math-expert/issues/12)
 
 ## [COCOMO](https://en.wikipedia.org/wiki/COCOMO) estimates
 ***Using [scc](https://github.com/boyter/scc)***

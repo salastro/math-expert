@@ -161,7 +161,7 @@ made.
 ### Running
 [LaTeX](https://www.latex-project.org/) (see https://github.com/salastro/math-expert/issues/9)
 
-## [COCOMO](https://en.wikipedia.org/wiki/COCOMO) estimations
+## [COCOMO](https://en.wikipedia.org/wiki/COCOMO) estimates
 ***Using [scc](https://github.com/boyter/scc)***
 ```
 ───────────────────────────────────────────────────────────────────────────────

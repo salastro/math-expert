@@ -88,12 +88,12 @@ parts of SymPy and NumPy code were written more
 
 As mentioned above, the goals of the code are minimalism, functionality,
 extensibility, and customizability. The program is divided into 3
-separate files: `gui.py` for all of the UI elements, `doc.py` for all
+separate files: `gui.py` for all of the UI elements, `func.py` for all
 the operations on documents, and `main.py` for the main program and
 linking of the two. This was to ease the switching of undesired modules
 and separate development based on the working context.
 
-`doc.py` was mainly structured as one class (`MathDoc`) with multiple methods for
+`func.py` was mainly structured as one class (`MathDoc`) with multiple methods for
 document manipulation (e.g. `Inte`, `Diff`, etc). The class is
 instantiated and used in `main.py` in the `__name__ == "__main__"` if
 statement after the imports outside the conditional; on every button

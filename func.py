@@ -1,16 +1,17 @@
 from __future__ import division
-from sympy import integrate, sqrt, diff, limit, Limit, oo, simplify, factor, \
-        trigsimp, Eq, solve, sympify, Derivative, Integral
 
+from pylatex import Alignat, Axis, Center, Command, Document, Plot, TikZ
+# Section, Subsection, Math, Figure, Matrix,
+from pylatex.utils import NoEscape
+from sympy import (Derivative, Eq, Integral, Limit, diff, factor, integrate,
+                   limit, oo, simplify, solve, sqrt, sympify, trigsimp)
 # from sympy.integrals.manualintegrate import manualintegrate, integral_steps
 # from sympy.integrals.risch import NonElementaryIntegral
 from sympy.abc import x
 from sympy.printing import latex
 
-from pylatex import Document, TikZ, Axis, Plot, Alignat, Command, Center
-# Section, Subsection, Math, Figure, Matrix,
-from pylatex.utils import NoEscape
-from err import QtWidgets, Ui_Dialog as Form
+from err import QtWidgets
+from err import Ui_Dialog as Form
 
 
 def error_message():
@@ -142,8 +143,8 @@ class MathDoc(Document):
 
     def Eval(self, equation):
         try:
-            from numpy import sin, cos, tan, exp, log, log10, pi, sqrt, arcsin, \
-                    arccos, arctan
+            from numpy import (arccos, arcsin, arctan, cos, exp, log, log10,
+                               pi, sin, sqrt, tan)
             solution = eval(equation.replace('^', '**'))
             equation = sympify(equation, evaluate=False)
             # solution = eval(equation)
@@ -172,7 +173,7 @@ if __name__ == '__main__':
     file_name = 'full'
 
     doc.Heading(title='Integral Homework', author='SalahDin Rezk')
-    from sympy import sin, cos
+    from sympy import cos, sin
     doc.Inte((sin(x)**2-cos(x)**2)/(cos(x)**2*sin(x)**2))
     doc.Diff('x**x')
     doc.Diff('x**x, 2')

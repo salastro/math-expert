@@ -1,11 +1,12 @@
 from __future__ import division
-from func import MathDoc
-from sympy import sin, cos, tan, exp, log, ln, sqrt, sympify, pi, oo, \
-    symbols, asin, acos, atan, cot, csc, sec  # common math
-from sympy import Function, Derivative, Eq, dsolve
-from sympy.abc import x
-from gui import QtWidgets, Ui_MainWindow  # gui
 
+from sympy import (Derivative, Eq, Function, acos, asin, atan,  # common math
+                   cos, cot, csc, dsolve, exp, ln, log, oo, pi, sec, sin, sqrt,
+                   symbols, sympify, tan)
+from sympy.abc import x
+
+from func import MathDoc
+from gui import QtWidgets, Ui_MainWindow  # gui
 
 if __name__ == "__main__":
     # Setup the ui.

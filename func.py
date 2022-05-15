@@ -74,7 +74,7 @@ class MathDoc(Document):
                 agn.append(r"=")
                 agn.append(latex(solution))
                 agn.append(r"+C") if solvable else None
-        except:
+        except Exception:
             error_message()
 
     def Diff(self, equation):
@@ -90,7 +90,7 @@ class MathDoc(Document):
                 agn.append(latex(equation))
                 agn.append(r"=")
                 agn.append(latex(solution))
-        except:
+        except Exception:
             error_message()
 
     def Lim(self, equation):
@@ -112,7 +112,7 @@ class MathDoc(Document):
                 agn.append(latex(Limit(show, x, a, s)))
                 agn.append(r"=")
                 agn.append(latex(solution))
-        except:
+        except Exception:
             error_message()
 
     def Simp(self, equation):
@@ -123,7 +123,7 @@ class MathDoc(Document):
                 agn.append(latex(equation))
                 agn.append(r"=")
                 agn.append(latex(solution))
-        except:
+        except Exception:
             error_message()
 
     def Fact(self, equation):
@@ -134,7 +134,7 @@ class MathDoc(Document):
                 agn.append(latex(equation))
                 agn.append(r"=")
                 agn.append(latex(solution))
-        except:
+        except Exception:
             error_message()
 
     def Sol(self, equation):
@@ -157,7 +157,7 @@ class MathDoc(Document):
                 agn.append(r"\Rightarrow")
                 agn.append(r"x=") if x_ else None
                 agn.append(latex(solution))
-        except:
+        except Exception:
             error_message()
 
     def Eval(self, equation):
@@ -183,7 +183,7 @@ class MathDoc(Document):
                 agn.append(latex(equation))
                 agn.append(r"=")
                 agn.append(latex(solution))
-        except:
+        except Exception:
             error_message()
 
     def Plot(
@@ -195,7 +195,7 @@ class MathDoc(Document):
                     plot_options = f"height={height}, width={width}, grid={grid}, axis lines={axis_lines}"
                     with self.create(Axis(options=plot_options)) as plot:
                         plot.append(Plot(name=equation, func=equation))
-        except:
+        except Exception:
             error_message()
 
 

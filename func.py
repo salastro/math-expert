@@ -43,21 +43,39 @@ class MathDoc(Document):
         super().__init__()
         # TODO: add preamble change gemotry
 
-    def Heading(self, title, author, date=r"\today"):
+    def Heading(self, title: str, author: str, date: str = r"\today") -> None:
         self.preamble.append(Command("title", title))
         self.preamble.append(Command("author", author))
         self.preamble.append(Command("date", NoEscape(date)))
         self.append(NoEscape(r"\maketitle"))
 
-    def GenPdf(self, file, title, author, date=r"\today", clean_tex=True):
+    def GenPdf(
+        self,
+        file: str,
+        title: str,
+        author: str,
+        date: str = r"\today",
+        clean_tex: bool = True,
+    ) -> None:
         self.Heading(title, author, date)
         self.generate_pdf(file, clean_tex=clean_tex)
 
-    def GenTex(self, file, title, author, date=r"\today"):
+    def GenTex(self, file: str, title: str, author: str, date: str = r"\today") -> None:
         self.Heading(title, author, date)
         self.generate_tex(file)
 
-    def Inte(self, equation):
+    def Append(self, *equations: str) -> None:
+        """Append a sequence of experssions into the document
+
+        :*equations: the experssions to be added to the document
+        :returns: None
+
+        """
+        with self.create(Alignat(numbering=True, escape=False)) as agn:
+            for equation in equations:
+                agn.append(equation) if equation is not None else None
+
+    def Inte(self, equation: str) -> None:
         try:
             solvable = True
             equation = sympify(equation)
@@ -65,19 +83,15 @@ class MathDoc(Document):
             # solution = integrate(trigsimp(simplify(equation)), x)
             equation = Integral(equation, x)
             print(equation, solution)
-            if equation == solution:
+            if str(equation) == str(solution):
                 solution = "No computable integral"
                 solvable = False
                 print("no computable integral")
-            with self.create(Alignat(numbering=True, escape=False)) as agn:
-                agn.append(latex(equation))
-                agn.append(r"=")
-                agn.append(latex(solution))
-                agn.append(r"+C") if solvable else None
+            self.Append(latex(equation), r"=", latex(solution), r"+C" if solvable else None)
         except Exception:
             error_message()
 
-    def Diff(self, equation):
+    def Diff(self, equation: str) -> None:
         try:
             eq = equation.split(",")
             equation = sympify(eq[0])
@@ -86,14 +100,11 @@ class MathDoc(Document):
             for _ in range(n):
                 solution = simplify(diff(solution, x))
                 equation = Derivative(equation, x)
-            with self.create(Alignat(numbering=True, escape=False)) as agn:
-                agn.append(latex(equation))
-                agn.append(r"=")
-                agn.append(latex(solution))
+            self.Append(latex(equation), r"=", latex(solution))
         except Exception:
             error_message()
 
-    def Lim(self, equation):
+    def Lim(self, equation: str) -> None:
         try:
             eq = equation.split(",")
             match len(eq):
@@ -108,36 +119,27 @@ class MathDoc(Document):
                 solution = "No computable limit"
                 print("no computable limit")
             print(eq, solution, show, sep="\n")
-            with self.create(Alignat(numbering=True, escape=False)) as agn:
-                agn.append(latex(Limit(show, x, a, s)))
-                agn.append(r"=")
-                agn.append(latex(solution))
+            self.Append(latex(Limit(show, x, a, s)), r"=", latex(solution))
         except Exception:
             error_message()
 
-    def Simp(self, equation):
+    def Simp(self, equation: str) -> None:
         try:
             equation = sympify(equation)
             solution = trigsimp(simplify(equation))
-            with self.create(Alignat(numbering=True, escape=False)) as agn:
-                agn.append(latex(equation))
-                agn.append(r"=")
-                agn.append(latex(solution))
+            self.Append(latex(equation), r"=", latex(solution))
         except Exception:
             error_message()
 
-    def Fact(self, equation):
+    def Fact(self, equation: str) -> None:
         try:
             equation = sympify(equation)
             solution = factor(equation)
-            with self.create(Alignat(numbering=True, escape=False)) as agn:
-                agn.append(latex(equation))
-                agn.append(r"=")
-                agn.append(latex(solution))
+            self.Append(latex(equation), r"=", latex(solution))
         except Exception:
             error_message()
 
-    def Sol(self, equation):
+    def Sol(self, equation: str) -> None:
         try:
             if "=" in equation:
                 eq = equation.split("=")
@@ -147,20 +149,17 @@ class MathDoc(Document):
                 equation = sympify(equation)
                 solution = solve(sympify(equation))
                 x_ = False
-            with self.create(Alignat(numbering=True, escape=False)) as agn:
-                if not x_:
-                    agn.append(latex(equation))
-                else:
-                    agn.append(latex(sympify(eq[0])))
-                    agn.append(r"=")
-                    agn.append(latex(sympify(eq[1])))
-                agn.append(r"\Rightarrow")
-                agn.append(r"x=") if x_ else None
-                agn.append(latex(solution))
+            self.Append(
+                latex(equation) if not x_
+                else rf"{latex(sympify(eq[0]))} = {latex(sympify(eq[1]))}",
+                r"\Rightarrow",
+                r"x=",
+                latex(solution)
+            )
         except Exception:
             error_message()
 
-    def Eval(self, equation):
+    def Eval(self, equation: str) -> None:
         try:
             from numpy import (
                 arccos,
@@ -176,19 +175,21 @@ class MathDoc(Document):
                 tan,
             )
 
-            solution = eval(equation.replace("^", "**"))
+            solution = sympify(eval(equation.replace("^", "**")))
             equation = sympify(equation, evaluate=False)
             # solution = eval(equation)
-            with self.create(Alignat(numbering=True, escape=False)) as agn:
-                agn.append(latex(equation))
-                agn.append(r"=")
-                agn.append(latex(solution))
+            self.Append(latex(equation), r"=", latex(solution))
         except Exception:
             error_message()
 
     def Plot(
-        self, equation, height="6cm", width="6cm", grid="both", axis_lines="middle"
-    ):
+        self,
+        equation: str,
+        height: str = "6cm",
+        width: str = "6cm",
+        grid: str = "both",
+        axis_lines: str = "middle",
+    ) -> None:
         try:
             with self.create(Center()):
                 with self.create(TikZ()):
@@ -204,20 +205,21 @@ if __name__ == "__main__":
     doc = MathDoc()
     file_name = "full"
 
-    doc.Heading(title="Integral Homework", author="SalahDin Rezk")
+    doc.Heading(title="Func.Py Tests", author="SalahDin Rezk")
     from sympy import cos, sin
 
-    doc.Inte((sin(x) ** 2 - cos(x) ** 2) / (cos(x) ** 2 * sin(x) ** 2))
-    doc.Diff("x**x")
-    doc.Diff("x**x, 2")
+    doc.Inte("(sin(x) ** 2 - cos(x) ** 2) / (cos(x) ** 2 * sin(x) ** 2)")
+    doc.Inte("x^x")
+    doc.Diff("x**(1/x)")
     doc.Diff("x**(1/x), 2")
     doc.Lim("2/sin(2*x),oo")
+    doc.Lim("(sin(x)^2 - cos(x)^2) / (cos(x)^2 * sin(x)^2), oo")
     doc.Sol("x+3=1")
     doc.Sol("x+3>1")
     doc.Eval("2^2")
     doc.Eval("sqrt(2)")
     doc.Eval("sin(2)")
     doc.Eval("sin(45/cos(3))")
-    # doc.Eval('(3i+5)-(10i+5)')
+    doc.Eval('sin(1j)')
 
     doc.generate_pdf(file_name, clean_tex=True)

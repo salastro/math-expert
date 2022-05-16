@@ -1,12 +1,9 @@
 from __future__ import division
 
 from sympy import (
-    Derivative,
-    Eq,
-    Function,
     acos,
     asin,
-    atan,  # common math
+    atan,
     cos,
     cot,
     csc,

@@ -87,7 +87,9 @@ class MathDoc(Document):
                 solution = "No computable integral"
                 solvable = False
                 print("no computable integral")
-            self.Append(latex(equation), r"=", latex(solution), r"+C" if solvable else None)
+            self.Append(
+                latex(equation), r"=", latex(solution), r"+C" if solvable else None
+            )
         except Exception:
             error_message()
 
@@ -150,11 +152,12 @@ class MathDoc(Document):
                 solution = solve(sympify(equation))
                 x_ = False
             self.Append(
-                latex(equation) if not x_
+                latex(equation)
+                if not x_
                 else rf"{latex(sympify(eq[0]))} = {latex(sympify(eq[1]))}",
                 r"\Rightarrow",
                 r"x=",
-                latex(solution)
+                latex(solution),
             )
         except Exception:
             error_message()
@@ -220,6 +223,6 @@ if __name__ == "__main__":
     doc.Eval("sqrt(2)")
     doc.Eval("sin(2)")
     doc.Eval("sin(45/cos(3))")
-    doc.Eval('sin(1j)')
+    doc.Eval("sin(1j)")
 
     doc.generate_pdf(file_name, clean_tex=True)

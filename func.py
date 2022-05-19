@@ -26,17 +26,6 @@ from sympy import (
 from sympy.abc import x
 from sympy.printing import latex
 
-from err import QtWidgets
-from err import Ui_Dialog as Form
-
-
-def error_message():
-    dialog = QtWidgets.QDialog()
-    dialog.ui = Form()
-    dialog.ui.setupUi(dialog)
-    dialog.exec_()
-    dialog.show()
-
 
 class MathDoc(Document):
     def __init__(self):
@@ -48,21 +37,6 @@ class MathDoc(Document):
         self.preamble.append(Command("author", author))
         self.preamble.append(Command("date", NoEscape(date)))
         self.append(NoEscape(r"\maketitle"))
-
-    def GenPdf(
-        self,
-        file: str,
-        title: str,
-        author: str,
-        date: str = r"\today",
-        clean_tex: bool = True,
-    ) -> None:
-        self.Heading(title, author, date)
-        self.generate_pdf(file, clean_tex=clean_tex)
-
-    def GenTex(self, file: str, title: str, author: str, date: str = r"\today") -> None:
-        self.Heading(title, author, date)
-        self.generate_tex(file)
 
     def Append(self, *equations: str) -> None:
         """Append a sequence of experssions into the document

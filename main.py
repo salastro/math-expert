@@ -23,56 +23,82 @@ from sympy import (
 from sympy.abc import x
 
 from func import MathDoc
-from gui import QtWidgets, Ui_MainWindow  # gui
+from gui import QtWidgets, Ui_MainWindow
+from PyQt5.QtWidgets import QMainWindow
+# from err import Ui_Dialog
+
+
+class MainWindow(QMainWindow, Ui_MainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.mathdoc = MathDoc()
+        self.headingFunc()
+        self.inteBt.clicked.connect(self.inteFunc)
+        self.diffBt.clicked.connect(self.diffFunc)
+        self.limBt.clicked.connect(self.limFunc)
+        self.simpBt.clicked.connect(self.simpFunc)
+        self.factBt.clicked.connect(self.factFunc)
+        self.solBt.clicked.connect(self.solFunc)
+        self.plotBt.clicked.connect(self.plotFunc)
+        self.evalBt.clicked.connect(self.evalFunc)
+        self.genPdfBt.clicked.connect(self.genPdfFunc)
+        self.genLatexBt.clicked.connect(self.genLatexFunc)
+
+    # def ErrorMessage(func):
+    #     # dialog = QtGui.QDialog()
+    #     dialog = Ui_Dialog()
+    #     dialog.setupUi(dialog)
+    #     dialog.exec_()
+    #     dialog.show()
+        
+    # @ErrorMessage
+    def inteFunc(self):
+        self.mathdoc.Inte(self.expTxt.toPlainText().replace(" ", ""))
+
+    def diffFunc(self):
+        self.mathdoc.Diff(self.expTxt.toPlainText().replace(" ", ""))
+
+    def limFunc(self):
+        self.mathdoc.Lim(self.expTxt.toPlainText().replace(" ", ""))
+
+    def simpFunc(self):
+        self.mathdoc.Simp(self.expTxt.toPlainText().replace(" ", ""))
+
+    def factFunc(self):
+        self.mathdoc.Fact(self.expTxt.toPlainText().replace(" ", ""))
+
+    def solFunc(self):
+        self.mathdoc.Sol(self.expTxt.toPlainText().replace(" ", ""))
+
+    def plotFunc(self):
+        self.mathdoc.Plot((self.expTxt.toPlainText().replace(" ", "")))
+
+    def evalFunc(self):
+        self.mathdoc.Eval((self.expTxt.toPlainText().replace(" ", "")))
+
+    def headingFunc(self):
+        self.mathdoc.Heading(
+            self.titleTxt.toPlainText(),
+            self.authorTxt.toPlainText(),
+        )
+
+    def genPdfFunc(self):
+        self.headingFunc()
+        self.mathdoc.generate_pdf(
+            self.fileTxt.toPlainText(),
+            clean_tex=True
+        )
+
+    # @ErrorMessage
+    def genLatexFunc(self):
+        self.headingFunc()
+        self.mathdoc.generate_tex(self.fileTxt.toPlainText())
 
 if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-
-    math_doc = MathDoc()
-    ui.inteBt.clicked.connect(
-        lambda: math_doc.Inte(ui.expTxt.toPlainText().replace(" ", ""))
-    )
-    ui.diffBt.clicked.connect(
-        lambda: math_doc.Diff(ui.expTxt.toPlainText().replace(" ", ""))
-    )
-    ui.limBt.clicked.connect(
-        lambda: math_doc.Lim(ui.expTxt.toPlainText().replace(" ", ""))
-    )
-    ui.simpBt.clicked.connect(
-        lambda: math_doc.Simp(ui.expTxt.toPlainText().replace(" ", ""))
-    )
-    ui.factBt.clicked.connect(
-        lambda: math_doc.Fact(ui.expTxt.toPlainText().replace(" ", ""))
-    )
-    ui.solBt.clicked.connect(
-        lambda: math_doc.Sol(ui.expTxt.toPlainText().replace(" ", ""))
-    )
-    ui.plotBt.clicked.connect(
-        lambda: math_doc.Plot((ui.expTxt.toPlainText().replace(" ", "")))
-    )
-    ui.evalBt.clicked.connect(
-        lambda: math_doc.Eval((ui.expTxt.toPlainText().replace(" ", "")))
-    )
-    ui.genPdfBt.clicked.connect(
-        lambda: math_doc.GenPdf(
-            ui.fileTxt.toPlainText(),
-            ui.titleTxt.toPlainText(),
-            ui.authorTxt.toPlainText(),
-            clean_tex=True,
-        )
-    )
-    ui.genLatexBt.clicked.connect(
-        lambda: math_doc.GenTex(
-            ui.fileTxt.toPlainText(),
-            ui.titleTxt.toPlainText(),
-            ui.authorTxt.toPlainText(),
-        )
-    )
-
-    MainWindow.show()
+    window = MainWindow()
+    window.show()
     sys.exit(app.exec_())

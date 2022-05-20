@@ -50,114 +50,93 @@ class MathDoc(Document):
                 agn.append(equation) if equation is not None else None
 
     def Inte(self, equation: str) -> None:
-        try:
-            solvable = True
-            equation = sympify(equation)
-            solution = trigsimp(simplify(integrate(equation, x)))
-            # solution = integrate(trigsimp(simplify(equation)), x)
-            equation = Integral(equation, x)
-            print(equation, solution)
-            if str(equation) == str(solution):
-                solution = "No computable integral"
-                solvable = False
-                print("no computable integral")
-            self.Append(
-                latex(equation), r"=", latex(solution), r"+C" if solvable else None
-            )
-        except Exception:
-            error_message()
+        solvable = True
+        equation = sympify(equation)
+        solution = trigsimp(simplify(integrate(equation, x)))
+        # solution = integrate(trigsimp(simplify(equation)), x)
+        equation = Integral(equation, x)
+        print(equation, solution)
+        if str(equation) == str(solution):
+            solution = "No computable integral"
+            solvable = False
+            print("no computable integral")
+        self.Append(
+            latex(equation), r"=", latex(solution), r"+C" if solvable else None
+        )
 
     def Diff(self, equation: str) -> None:
-        try:
-            eq = equation.split(",")
-            equation = sympify(eq[0])
-            n = int(eq[1]) if len(eq) == 2 else 1
-            solution = equation
-            for _ in range(n):
-                solution = simplify(diff(solution, x))
-                equation = Derivative(equation, x)
-            self.Append(latex(equation), r"=", latex(solution))
-        except Exception:
-            error_message()
+        eq = equation.split(",")
+        equation = sympify(eq[0])
+        n = int(eq[1]) if len(eq) == 2 else 1
+        solution = equation
+        for _ in range(n):
+            solution = simplify(diff(solution, x))
+            equation = Derivative(equation, x)
+        self.Append(latex(equation), r"=", latex(solution))
 
     def Lim(self, equation: str) -> None:
-        try:
-            eq = equation.split(",")
-            match len(eq):
-                case 1:
-                    show, a, s = equation, 0, "+"
-                case 2:
-                    show, a, s = eq[0], eq[1], "+"
-                case 3:
-                    show, a, s = eq[0], eq[1], eq[2]
-            solution = limit(sympify(show), x, sympify(a), s)
-            if Limit(show, x, a, s) == solution:
-                solution = "No computable limit"
-                print("no computable limit")
-            print(eq, solution, show, sep="\n")
-            self.Append(latex(Limit(show, x, a, s)), r"=", latex(solution))
-        except Exception:
-            error_message()
+        eq = equation.split(",")
+        match len(eq):
+            case 1:
+                show, a, s = equation, 0, "+"
+            case 2:
+                show, a, s = eq[0], eq[1], "+"
+            case 3:
+                show, a, s = eq[0], eq[1], eq[2]
+        solution = limit(sympify(show), x, sympify(a), s)
+        if Limit(show, x, a, s) == solution:
+            solution = "No computable limit"
+            print("no computable limit")
+        print(eq, solution, show, sep="\n")
+        self.Append(latex(Limit(show, x, a, s)), r"=", latex(solution))
 
     def Simp(self, equation: str) -> None:
-        try:
-            equation = sympify(equation)
-            solution = trigsimp(simplify(equation))
-            self.Append(latex(equation), r"=", latex(solution))
-        except Exception:
-            error_message()
+        equation = sympify(equation)
+        solution = trigsimp(simplify(equation))
+        self.Append(latex(equation), r"=", latex(solution))
 
     def Fact(self, equation: str) -> None:
-        try:
-            equation = sympify(equation)
-            solution = factor(equation)
-            self.Append(latex(equation), r"=", latex(solution))
-        except Exception:
-            error_message()
+        equation = sympify(equation)
+        solution = factor(equation)
+        self.Append(latex(equation), r"=", latex(solution))
 
     def Sol(self, equation: str) -> None:
-        try:
-            if "=" in equation:
-                eq = equation.split("=")
-                solution = solve(Eq(sympify(eq[0]), sympify(eq[1])))
-                x_ = True
-            else:
-                equation = sympify(equation)
-                solution = solve(sympify(equation))
-                x_ = False
-            self.Append(
-                latex(equation)
-                if not x_
-                else rf"{latex(sympify(eq[0]))} = {latex(sympify(eq[1]))}",
-                r"\Rightarrow",
-                r"x=",
-                latex(solution),
-            )
-        except Exception:
-            error_message()
+        if "=" in equation:
+            eq = equation.split("=")
+            solution = solve(Eq(sympify(eq[0]), sympify(eq[1])))
+            x_ = True
+        else:
+            equation = sympify(equation)
+            solution = solve(sympify(equation))
+            x_ = False
+        self.Append(
+            latex(equation)
+            if not x_
+            else rf"{latex(sympify(eq[0]))} = {latex(sympify(eq[1]))}",
+            r"\Rightarrow",
+            r"x=",
+            latex(solution),
+        )
 
     def Eval(self, equation: str) -> None:
-        try:
-            from numpy import (
-                arccos,
-                arcsin,
-                arctan,
-                cos,
-                exp,
-                log,
-                log10,
-                pi,
-                sin,
-                sqrt,
-                tan,
-            )
+        from numpy import (
+            arccos,
+            arcsin,
+            arctan,
+            cos,
+            exp,
+            log,
+            log10,
+            pi,
+            sin,
+            sqrt,
+            tan,
+        )
 
-            solution = sympify(eval(equation.replace("^", "**")))
-            equation = sympify(equation, evaluate=False)
-            # solution = eval(equation)
-            self.Append(latex(equation), r"=", latex(solution))
-        except Exception:
-            error_message()
+        solution = sympify(eval(equation.replace("^", "**")))
+        equation = sympify(equation, evaluate=False)
+        # solution = eval(equation)
+        self.Append(latex(equation), r"=", latex(solution))
 
     def Plot(
         self,
@@ -167,14 +146,11 @@ class MathDoc(Document):
         grid: str = "both",
         axis_lines: str = "middle",
     ) -> None:
-        try:
-            with self.create(Center()):
-                with self.create(TikZ()):
-                    plot_options = f"height={height}, width={width}, grid={grid}, axis lines={axis_lines}"
-                    with self.create(Axis(options=plot_options)) as plot:
-                        plot.append(Plot(name=equation, func=equation))
-        except Exception:
-            error_message()
+        with self.create(Center()):
+            with self.create(TikZ()):
+                plot_options = f"height={height}, width={width}, grid={grid}, axis lines={axis_lines}"
+                with self.create(Axis(options=plot_options)) as plot:
+                    plot.append(Plot(name=equation, func=equation))
 
 
 if __name__ == "__main__":

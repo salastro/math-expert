@@ -39,7 +39,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         """
         errorbox = QtWidgets.QMessageBox()
-        errorbox.setText(f"Error: {exc_type}, {exc_value}, {exc_traceback}")
+        errorbox.setText(f"""Error:
+        \n{exc_type}
+        \n{exc_value}
+        \n{exc_traceback}
+        """)
         errorbox.exec_()
 
     def inteFunc(self):

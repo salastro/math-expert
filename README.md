@@ -168,14 +168,14 @@ made.
 ───────────────────────────────────────────────────────────────────────────────
 Language                 Files     Lines   Blanks  Comments     Code Complexity
 ───────────────────────────────────────────────────────────────────────────────
-Python                       4       465       36        24      405         17
+Python                       3       445       29        28      388         20
 ───────────────────────────────────────────────────────────────────────────────
-Total                        4       465       36        24      405         17
+Total                        3       445       29        28      388         20
 ───────────────────────────────────────────────────────────────────────────────
-Estimated Cost to Develop (organic) $10,457
-Estimated Schedule Effort (organic) 2.431055 months
-Estimated People Required (organic) 0.382159
+Estimated Cost to Develop (organic) $9,996
+Estimated Schedule Effort (organic) 2.389814 months
+Estimated People Required (organic) 0.371638
 ───────────────────────────────────────────────────────────────────────────────
-Processed 19228 bytes, 0.019 megabytes (SI)
+Processed 17492 bytes, 0.017 megabytes (SI)
 ───────────────────────────────────────────────────────────────────────────────
 ```

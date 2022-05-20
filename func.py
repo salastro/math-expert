@@ -1,26 +1,10 @@
 from __future__ import division
 
 from pylatex import Alignat, Axis, Center, Command, Document, Plot, TikZ
-
 # Section, Subsection, Math, Figure, Matrix,
 from pylatex.utils import NoEscape
-from sympy import (
-    Derivative,
-    Eq,
-    Integral,
-    Limit,
-    diff,
-    factor,
-    integrate,
-    limit,
-    oo,
-    simplify,
-    solve,
-    sqrt,
-    sympify,
-    trigsimp,
-)
-
+from sympy import (Derivative, Eq, Integral, Limit, diff, factor, integrate,
+                   limit, oo, simplify, solve, sqrt, sympify, trigsimp)
 # from sympy.integrals.manualintegrate import manualintegrate, integral_steps
 # from sympy.integrals.risch import NonElementaryIntegral
 from sympy.abc import x
@@ -119,19 +103,8 @@ class MathDoc(Document):
         )
 
     def Eval(self, equation: str) -> None:
-        from numpy import (
-            arccos,
-            arcsin,
-            arctan,
-            cos,
-            exp,
-            log,
-            log10,
-            pi,
-            sin,
-            sqrt,
-            tan,
-        )
+        from numpy import (arccos, arcsin, arctan, cos, exp, log, log10, pi,
+                           sin, sqrt, tan)
 
         solution = sympify(eval(equation.replace("^", "**")))
         equation = sympify(equation, evaluate=False)

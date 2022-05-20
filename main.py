@@ -1,36 +1,20 @@
 from __future__ import division
 
-from sympy import (
-    acos,
-    asin,
-    atan,
-    cos,
-    cot,
-    csc,
-    dsolve,
-    exp,
-    ln,
-    log,
-    oo,
-    pi,
-    sec,
-    sin,
-    sqrt,
-    symbols,
-    sympify,
-    tan,
-)
+from PyQt5.QtWidgets import QMainWindow
+from sympy import (acos, asin, atan, cos, cot, csc, dsolve, exp, ln, log, oo,
+                   pi, sec, sin, sqrt, symbols, sympify, tan)
 from sympy.abc import x
 
 from func import MathDoc
 from gui import QtWidgets, Ui_MainWindow
-from PyQt5.QtWidgets import QMainWindow
-# from err import Ui_Dialog
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
+    # _exception_caught = QtCore.Signal(object)
+
     def __init__(self):
         super().__init__()
+        sys.excepthook = self.exceptHook
         self.setupUi(self)
         self.mathdoc = MathDoc()
         self.headingFunc()
@@ -45,14 +29,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.genPdfBt.clicked.connect(self.genPdfFunc)
         self.genLatexBt.clicked.connect(self.genLatexFunc)
 
-    # def ErrorMessage(func):
-    #     # dialog = QtGui.QDialog()
-    #     dialog = Ui_Dialog()
-    #     dialog.setupUi(dialog)
-    #     dialog.exec_()
-    #     dialog.show()
-        
-    # @ErrorMessage
+    def exceptHook(self, exc_type, exc_value, exc_traceback):
+        """Exceptions hook to be shown
+
+        :exc_type: TODO
+        :exc_value: TODO
+        :exc_traceback: TODO
+        :returns: TODO
+
+        """
+        errorbox = QtWidgets.QMessageBox()
+        errorbox.setText(f"Error: {exc_type}, {exc_value}, {exc_traceback}")
+        errorbox.exec_()
+
     def inteFunc(self):
         self.mathdoc.Inte(self.expTxt.toPlainText().replace(" ", ""))
 
@@ -90,10 +79,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             clean_tex=True
         )
 
-    # @ErrorMessage
     def genLatexFunc(self):
         self.headingFunc()
         self.mathdoc.generate_tex(self.fileTxt.toPlainText())
+
 
 if __name__ == "__main__":
     import sys

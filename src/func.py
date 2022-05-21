@@ -22,6 +22,9 @@ class MathDoc(Document):
         self.preamble.append(Command("title", title))
         self.preamble.append(Command("author", author))
         self.preamble.append(Command("date", NoEscape(date)))
+        logging.debug(f"Title: {title}")
+        logging.debug(f"Author: {author}")
+        logging.debug(f"Date: {date}")
         self.append(NoEscape(r"\maketitle"))
 
     def Append(self, *equations: str) -> None:
@@ -34,6 +37,7 @@ class MathDoc(Document):
         with self.create(Alignat(numbering=True, escape=False)) as agn:
             for equation in equations:
                 agn.append(equation) if equation is not None else None
+                logging.debug(f"Appended: {equation}")
 
     def Inte(self, equation: str) -> None:
         logging.debug(f"Orignial Equation: {equation}")

@@ -10,8 +10,6 @@ from gui import QtWidgets, Ui_MainWindow
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
-    # _exception_caught = QtCore.Signal(object)
-
     def __init__(self):
         super().__init__()
         sys.excepthook = self.exceptHook

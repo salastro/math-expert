@@ -180,6 +180,7 @@ if __name__ == "__main__":
     doc.Lim("2/sin(2*x),oo")
     doc.Lim("(sin(x)^2 - cos(x)^2) / (cos(x)^2 * sin(x)^2), oo")
     doc.Lim("(x^3-4*x)/(2*x^2+3*x)")
+    doc.Lim("sin(x), oo")
     doc.Sol("x+3=1")
     doc.Sol("x+3>1")
     doc.Eval("2^2")

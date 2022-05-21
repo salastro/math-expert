@@ -39,7 +39,7 @@ class MathDoc(Document):
                 agn.append(equation) if equation is not None else None
                 logging.debug(f"Appended: {equation}")
 
-    def Inte(self, equation: str) -> None:
+    def inte(self, equation: str) -> None:
         logging.debug(f"Orignial Equation: {equation}")
         solvable = True
         equation = sympify(equation)
@@ -58,7 +58,7 @@ class MathDoc(Document):
             r"+C" if solvable else None
         )
 
-    def Diff(self, equation: str) -> None:
+    def diff(self, equation: str) -> None:
         logging.debug(f"Orignial Equation: {equation}")
         eq = equation.split(",")
         equation = sympify(eq[0])
@@ -72,7 +72,7 @@ class MathDoc(Document):
         logging.debug(f"Solution: {solution}")
         self.Append(latex(equation), r"=", latex(solution))
 
-    def Lim(self, equation: str) -> None:
+    def lim(self, equation: str) -> None:
         logging.debug(f"Orignial Equation: {equation}")
         eq = list(map(lambda a: sympify(a), equation.split(",")))
         match len(eq):
@@ -91,7 +91,7 @@ class MathDoc(Document):
         logging.debug(f"Solution: {solution}")
         self.Append(latex(Limit(show, x, a, s)), r"=", latex(solution))
 
-    def Simp(self, equation: str) -> None:
+    def simp(self, equation: str) -> None:
         logging.debug(f"Orignial Equation: {equation}")
         equation = sympify(equation)
         logging.debug(f"Sympifyed Equation: {equation}")
@@ -99,7 +99,7 @@ class MathDoc(Document):
         logging.debug(f"Solution: {solution}")
         self.Append(latex(equation), r"=", latex(solution))
 
-    def Fact(self, equation: str) -> None:
+    def fact(self, equation: str) -> None:
         logging.debug(f"Orignial Equation: {equation}")
         equation = sympify(equation)
         logging.debug(f"Sympifyed Equation: {equation}")
@@ -108,7 +108,7 @@ class MathDoc(Document):
         logging.debug(f"Solution: {solution}")
         self.Append(latex(equation), r"=", latex(solution))
 
-    def Sol(self, equation: str) -> None:
+    def sol(self, equation: str) -> None:
         logging.debug(f"Orignial Equation: {equation}")
         if "=" in equation:
             eq = list(map(lambda a: sympify(a), equation.split("=")))
@@ -130,7 +130,7 @@ class MathDoc(Document):
             latex(solution),
         )
 
-    def Eval(self, equation: str) -> None:
+    def eval(self, equation: str) -> None:
         from numpy import (arccos, arcsin, arctan, cos, exp, log, log10, pi,
                            sin, sqrt, tan)
 
@@ -142,7 +142,7 @@ class MathDoc(Document):
         # solution = eval(equation)
         self.Append(latex(equation), r"=", latex(solution))
 
-    def Plot(
+    def plot(
         self,
         equation: str,
         height: str = "6cm",
@@ -173,20 +173,20 @@ if __name__ == "__main__":
     doc.Heading(title="Func.Py Tests", author="SalahDin Rezk")
     from sympy import cos, sin
 
-    doc.Inte("(sin(x) ** 2 - cos(x) ** 2) / (cos(x) ** 2 * sin(x) ** 2)")
-    doc.Inte("x^x")
-    doc.Diff("x**(1/x)")
-    doc.Diff("x**(1/x), 2")
-    doc.Lim("2/sin(2*x),oo")
-    doc.Lim("(sin(x)^2 - cos(x)^2) / (cos(x)^2 * sin(x)^2), oo")
-    doc.Lim("(x^3-4*x)/(2*x^2+3*x)")
-    doc.Lim("sin(x), oo")
-    doc.Sol("x+3=1")
-    doc.Sol("x+3>1")
-    doc.Eval("2^2")
-    doc.Eval("sqrt(2)")
-    doc.Eval("sin(2)")
-    doc.Eval("sin(45/cos(3))")
-    doc.Eval("sin(1j)")
+    doc.inte("(sin(x) ** 2 - cos(x) ** 2) / (cos(x) ** 2 * sin(x) ** 2)")
+    doc.inte("x^x")
+    doc.diff("x**(1/x)")
+    doc.diff("x**(1/x), 2")
+    doc.lim("2/sin(2*x),oo")
+    doc.lim("(sin(x)^2 - cos(x)^2) / (cos(x)^2 * sin(x)^2), oo")
+    doc.lim("(x^3-4*x)/(2*x^2+3*x)")
+    doc.lim("sin(x), oo")
+    doc.sol("x+3=1")
+    doc.sol("x+3>1")
+    doc.eval("2^2")
+    doc.eval("sqrt(2)")
+    doc.eval("sin(2)")
+    doc.eval("sin(45/cos(3))")
+    doc.eval("sin(1j)")
 
     doc.generate_pdf(file_name, clean_tex=True)

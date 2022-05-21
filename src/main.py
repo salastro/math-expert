@@ -12,33 +12,18 @@ from gui import QtWidgets, Ui_MainWindow
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
+
     def __init__(self):
         super().__init__()
         sys.excepthook = self.exceptHook
         self.setupUi(self)
         self.mathdoc = MathDoc()
         self.headingFunc()
-        self.expTxt.setFocus()
-        self.inteBt.clicked.connect(self.inteFunc)
-        self.inteBt.setShortcut("Ctrl+I")
-        self.diffBt.clicked.connect(self.diffFunc)
-        self.diffBt.setShortcut("Ctrl+D")
-        self.limBt.clicked.connect(self.limFunc)
-        self.limBt.setShortcut("Ctrl+L")
-        self.simpBt.clicked.connect(self.simpFunc)
-        self.simpBt.setShortcut("Alt+S")
-        self.factBt.clicked.connect(self.factFunc)
-        self.factBt.setShortcut("Ctrl+F")
-        self.solBt.clicked.connect(self.solFunc)
-        self.solBt.setShortcut("Ctrl+S")
-        self.plotBt.clicked.connect(self.plotFunc)
-        self.plotBt.setShortcut("Ctrl+P")
-        self.evalBt.clicked.connect(self.evalFunc)
-        self.evalBt.setShortcut("Ctrl+E")
-        self.genPdfBt.clicked.connect(self.genPdfFunc)
-        self.genPdfBt.setShortcut("Ctrl+Return")
-        self.genLatexBt.clicked.connect(self.genLatexFunc)
-        self.genLatexBt.setShortcut("Alt+Return")
+        for op, shortcut in self.operations.items():
+            exec(f"""
+                \nself.{op}Bt.clicked.connect(self.{op}Func)
+                \nself.{op}Bt.setShortcut("{shortcut}")
+            """)
 
     def exceptHook(self, exc_type, exc_value, exc_traceback):
         """Exceptions hook to be shown
@@ -61,29 +46,24 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """)
         errorbox.exec_()
 
-    def inteFunc(self):
-        self.mathdoc.Inte(self.expTxt.toPlainText().replace(" ", ""))
-
-    def diffFunc(self):
-        self.mathdoc.Diff(self.expTxt.toPlainText().replace(" ", ""))
-
-    def limFunc(self):
-        self.mathdoc.Lim(self.expTxt.toPlainText().replace(" ", ""))
-
-    def simpFunc(self):
-        self.mathdoc.Simp(self.expTxt.toPlainText().replace(" ", ""))
-
-    def factFunc(self):
-        self.mathdoc.Fact(self.expTxt.toPlainText().replace(" ", ""))
-
-    def solFunc(self):
-        self.mathdoc.Sol(self.expTxt.toPlainText().replace(" ", ""))
-
-    def plotFunc(self):
-        self.mathdoc.Plot((self.expTxt.toPlainText().replace(" ", "")))
-
-    def evalFunc(self):
-        self.mathdoc.Eval((self.expTxt.toPlainText().replace(" ", "")))
+    operations = {
+        "inte": "Ctrl+I",
+        "diff": "Ctrl+D",
+        "lim": "Ctrl+L",
+        "fact": "Ctrl+F",
+        "sol": "Ctrl+S",
+        "simp": "Alt+S",
+        "eval": "Ctrl+E",
+        "plot": "Ctrl+P",
+        "genPdf": "Ctrl+Return",
+        "genLatex": "Alt+Return"
+    }
+    for func in operations:
+        if func not in ["genPdf", "genLatex"]:
+            exec(f"""
+                \ndef {func}Func(self):
+                \n    self.mathdoc.{func}(self.expTxt.toPlainText().replace(" ", ""))
+            """)
 
     def headingFunc(self):
         self.mathdoc.Heading(
@@ -107,7 +87,7 @@ if __name__ == "__main__":
     import sys
 
     level = logging.DEBUG
-    fmt = '[%(levelname)s] %(asctime)s - %(funcName)s|%(message)s'
+    fmt = "[%(levelname)s] %(asctime)s - %(funcName)s|%(message)s"
     logging.basicConfig(level=level, format=fmt)
 
     app = QtWidgets.QApplication(sys.argv)

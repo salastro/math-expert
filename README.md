@@ -60,7 +60,7 @@ product of this decision.
 
 ## Philosophy
 
-Although the infamous *[it just works](https://www.zdnet.com/article/apple-seems-to-have-forgotten-about-the-whole-it-just-works-thing/)*
+Although the infamous *[it just works](https://www.urbandictionary.com/define.php?term=IT%20JUST%20WORKS)*
 are spread throughout the codebase, which is not ideal for a structured
 project, the goal of our is to define a great code that follows best
 practices (e.g. [PEP 8](https://peps.python.org/pep-0008/)) to have a

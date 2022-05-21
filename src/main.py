@@ -1,5 +1,7 @@
 from __future__ import division
 
+import logging
+
 from PyQt5.QtWidgets import QMainWindow
 from sympy import (acos, asin, atan, cos, cot, csc, dsolve, exp, ln, log, oo,
                    pi, sec, sin, sqrt, symbols, sympify, tan)
@@ -36,6 +38,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         :returns: TODO
 
         """
+        logging.error(f"Exception Type: {exc_type}")
+        logging.error(f"Exception Value: {exc_value}")
+        logging.error(f"Exception Traceback: {exc_traceback}")
+
         errorbox = QtWidgets.QMessageBox()
         errorbox.setText(f"""Error:
         \n{exc_type}
@@ -88,6 +94,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
 if __name__ == "__main__":
     import sys
+
+    level = logging.DEBUG
+    fmt = '[%(levelname)s] %(asctime)s - %(funcName)s|%(message)s'
+    logging.basicConfig(level=level, format=fmt)
 
     app = QtWidgets.QApplication(sys.argv)
     window = MainWindow()

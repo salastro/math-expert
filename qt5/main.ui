@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>603</width>
-    <height>667</height>
+    <height>623</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,6 +25,18 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
+    <item row="3" column="0" colspan="2">
+     <widget class="QLineEdit" name="fileTxt">
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>MathDocument</string>
+      </property>
+     </widget>
+    </item>
     <item row="1" column="0">
      <widget class="QLabel" name="label">
       <property name="font">
@@ -100,6 +112,12 @@
        <font>
         <pointsize>11</pointsize>
        </font>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::StrongFocus</enum>
+      </property>
+      <property name="tabChangesFocus">
+       <bool>true</bool>
       </property>
       <property name="plainText">
        <string>Marawan, SalahDin, Younis</string>
@@ -188,6 +206,9 @@
         <pointsize>11</pointsize>
        </font>
       </property>
+      <property name="tabChangesFocus">
+       <bool>true</bool>
+      </property>
       <property name="plainText">
        <string>STEM Luxor Grade 12 Math Project</string>
       </property>
@@ -242,18 +263,6 @@
       </property>
      </widget>
     </item>
-    <item row="6" column="0" colspan="2">
-     <widget class="QPlainTextEdit" name="expTxt">
-      <property name="font">
-       <font>
-        <pointsize>11</pointsize>
-       </font>
-      </property>
-      <property name="plainText">
-       <string>(sin(x)^2-cos(x)^2)/(cos(x)^2*sin(x)^2)</string>
-      </property>
-     </widget>
-    </item>
     <item row="12" column="0">
      <widget class="QPushButton" name="limBt">
       <property name="font">
@@ -302,15 +311,21 @@
       </property>
      </widget>
     </item>
-    <item row="3" column="0" colspan="2">
-     <widget class="QLineEdit" name="fileTxt">
+    <item row="6" column="0" colspan="2">
+     <widget class="QPlainTextEdit" name="expTxt">
       <property name="font">
        <font>
         <pointsize>11</pointsize>
        </font>
       </property>
-      <property name="text">
-       <string>MathDocument</string>
+      <property name="focusPolicy">
+       <enum>Qt::StrongFocus</enum>
+      </property>
+      <property name="tabChangesFocus">
+       <bool>true</bool>
+      </property>
+      <property name="plainText">
+       <string>(sin(x)^2-cos(x)^2)/(cos(x)^2*sin(x)^2)</string>
       </property>
      </widget>
     </item>
@@ -323,6 +338,22 @@
    </property>
   </action>
  </widget>
+ <tabstops>
+  <tabstop>fileTxt</tabstop>
+  <tabstop>titleTxt</tabstop>
+  <tabstop>authorTxt</tabstop>
+  <tabstop>expTxt</tabstop>
+  <tabstop>diffBt</tabstop>
+  <tabstop>inteBt</tabstop>
+  <tabstop>limBt</tabstop>
+  <tabstop>simpBt</tabstop>
+  <tabstop>factBt</tabstop>
+  <tabstop>solBt</tabstop>
+  <tabstop>evalBt</tabstop>
+  <tabstop>plotBt</tabstop>
+  <tabstop>genPdfBt</tabstop>
+  <tabstop>genLatexBt</tabstop>
+ </tabstops>
  <resources>
   <include location="media.qrc"/>
  </resources>

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>603</width>
+    <width>611</width>
     <height>623</height>
    </rect>
   </property>
@@ -59,6 +59,24 @@
       </property>
       <property name="text">
        <string>Calculus</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="0" colspan="2">
+     <widget class="QPlainTextEdit" name="expTxt">
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::StrongFocus</enum>
+      </property>
+      <property name="tabChangesFocus">
+       <bool>true</bool>
+      </property>
+      <property name="plainText">
+       <string>(sin(x)^2-cos(x)^2)/(cos(x)^2*sin(x)^2)</string>
       </property>
      </widget>
     </item>
@@ -134,6 +152,9 @@
       <property name="text">
        <string>Simplify</string>
       </property>
+      <property name="shortcut">
+       <string>Alt+S</string>
+      </property>
      </widget>
     </item>
     <item row="15" column="1">
@@ -146,17 +167,8 @@
       <property name="text">
        <string>Plot</string>
       </property>
-     </widget>
-    </item>
-    <item row="12" column="1">
-     <widget class="QPushButton" name="solBt">
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Solve for X</string>
+      <property name="shortcut">
+       <string>Ctrl+P</string>
       </property>
      </widget>
     </item>
@@ -170,6 +182,9 @@
       <property name="text">
        <string>Integrate</string>
       </property>
+      <property name="shortcut">
+       <string>Ctrl+I</string>
+      </property>
      </widget>
     </item>
     <item row="15" column="0">
@@ -181,6 +196,9 @@
       </property>
       <property name="text">
        <string>Evaluate</string>
+      </property>
+      <property name="shortcut">
+       <string>Ctrl+E</string>
       </property>
      </widget>
     </item>
@@ -196,6 +214,9 @@
       </property>
       <property name="text">
        <string>Differentiate</string>
+      </property>
+      <property name="shortcut">
+       <string>Ctrl+D</string>
       </property>
      </widget>
     </item>
@@ -236,6 +257,9 @@
       <property name="text">
        <string>Generate LaTeX</string>
       </property>
+      <property name="shortcut">
+       <string>Alt+Return</string>
+      </property>
      </widget>
     </item>
     <item row="21" column="0">
@@ -247,6 +271,9 @@
       </property>
       <property name="text">
        <string>Generate PDF</string>
+      </property>
+      <property name="shortcut">
+       <string>Ctrl+Return</string>
       </property>
      </widget>
     </item>
@@ -273,6 +300,9 @@
       <property name="text">
        <string>Limit</string>
       </property>
+      <property name="shortcut">
+       <string>Ctrl+L</string>
+      </property>
      </widget>
     </item>
     <item row="11" column="1">
@@ -284,6 +314,9 @@
       </property>
       <property name="text">
        <string>Factorize</string>
+      </property>
+      <property name="shortcut">
+       <string>Ctrl+F</string>
       </property>
      </widget>
     </item>
@@ -311,25 +344,44 @@
       </property>
      </widget>
     </item>
-    <item row="6" column="0" colspan="2">
-     <widget class="QPlainTextEdit" name="expTxt">
+    <item row="12" column="1">
+     <widget class="QPushButton" name="solBt">
       <property name="font">
        <font>
-        <pointsize>11</pointsize>
+        <pointsize>10</pointsize>
        </font>
       </property>
-      <property name="focusPolicy">
-       <enum>Qt::StrongFocus</enum>
+      <property name="text">
+       <string>Solve for X</string>
       </property>
-      <property name="tabChangesFocus">
-       <bool>true</bool>
-      </property>
-      <property name="plainText">
-       <string>(sin(x)^2-cos(x)^2)/(cos(x)^2*sin(x)^2)</string>
+      <property name="shortcut">
+       <string>Ctrl+S</string>
       </property>
      </widget>
     </item>
    </layout>
+   <zorder>label_8</zorder>
+   <zorder>plotBt</zorder>
+   <zorder>inteBt</zorder>
+   <zorder>label_4</zorder>
+   <zorder>simpBt</zorder>
+   <zorder>solBt</zorder>
+   <zorder>evalBt</zorder>
+   <zorder>factBt</zorder>
+   <zorder>label_5</zorder>
+   <zorder>diffBt</zorder>
+   <zorder>authorTxt</zorder>
+   <zorder>label_6</zorder>
+   <zorder>label_2</zorder>
+   <zorder>label</zorder>
+   <zorder>label_3</zorder>
+   <zorder>expTxt</zorder>
+   <zorder>titleTxt</zorder>
+   <zorder>frame</zorder>
+   <zorder>genPdfBt</zorder>
+   <zorder>genLatexBt</zorder>
+   <zorder>fileTxt</zorder>
+   <zorder>limBt</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionNew">
@@ -344,15 +396,15 @@
   <tabstop>authorTxt</tabstop>
   <tabstop>expTxt</tabstop>
   <tabstop>diffBt</tabstop>
-  <tabstop>inteBt</tabstop>
-  <tabstop>limBt</tabstop>
-  <tabstop>simpBt</tabstop>
   <tabstop>factBt</tabstop>
-  <tabstop>solBt</tabstop>
   <tabstop>evalBt</tabstop>
-  <tabstop>plotBt</tabstop>
-  <tabstop>genPdfBt</tabstop>
+  <tabstop>limBt</tabstop>
   <tabstop>genLatexBt</tabstop>
+  <tabstop>genPdfBt</tabstop>
+  <tabstop>solBt</tabstop>
+  <tabstop>simpBt</tabstop>
+  <tabstop>inteBt</tabstop>
+  <tabstop>plotBt</tabstop>
  </tabstops>
  <resources>
   <include location="media.qrc"/>

@@ -13,16 +13,23 @@ from gui import QtWidgets, Ui_MainWindow
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
-
     def __init__(self):
         super().__init__()
         sys.excepthook = self.exceptHook
         self.setupUi(self)
         self.mathdoc = MathDoc()
         self.headingFunc()
-        for op, shortcut in self.operations.items():
-            getattr(self, f"{op}Bt").setShortcut(shortcut)
         self.expTxt.setFocus()
+
+    operations = ["inte", "diff", "lim", "fact", "sol",
+                  "simp", "eval", "plot", "genPdf", "genLatex"]
+
+    for func in operations:
+        exec(f"""
+            \n@pyqtSlot()
+            \ndef on_{func}Bt_clicked(self):
+            \n    self.mathdoc.{func}(self.expTxt.toPlainText().replace(" ", ""))
+        """)
 
     def exceptHook(self, exc_type, exc_value, exc_traceback):
         """Exceptions hook to be shown
@@ -41,31 +48,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         errorbox = QtWidgets.QMessageBox()
         errorbox.setText(f"""Error:
-        \n{exc_type}
-        \n{exc_value}
-        \n{format_tb(exc_traceback)}
-        """)
+                \n{exc_type}
+                \n{exc_value}
+                \n{format_tb(exc_traceback)}
+                """)
         errorbox.exec_()
-
-    operations = {
-        "inte": "Ctrl+I",
-        "diff": "Ctrl+D",
-        "lim": "Ctrl+L",
-        "fact": "Ctrl+F",
-        "sol": "Ctrl+S",
-        "simp": "Alt+S",
-        "eval": "Ctrl+E",
-        "plot": "Ctrl+P",
-        "genPdf": "Ctrl+Return",
-        "genLatex": "Alt+Return"
-    }
-
-    for func in operations:
-        exec(f"""
-            \n@pyqtSlot()
-            \ndef on_{func}Bt_clicked(self):
-            \n    self.mathdoc.{func}(self.expTxt.toPlainText().replace(" ", ""))
-        """)
 
     def headingFunc(self):
         self.mathdoc.Heading(

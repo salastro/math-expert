@@ -24,6 +24,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             exec(f"""
                 \nself.{op}Bt.setShortcut("{shortcut}")
             """)
+        self.expTxt.setFocus()
 
     def exceptHook(self, exc_type, exc_value, exc_traceback):
         """Exceptions hook to be shown

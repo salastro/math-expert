@@ -2,8 +2,8 @@ from __future__ import division
 
 import logging
 
+from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QMainWindow
-from PyQt5 import QtCore
 from sympy import (acos, asin, atan, cos, cot, csc, dsolve, exp, ln, log, oo,
                    pi, sec, sin, sqrt, symbols, sympify, tan)
 from sympy.abc import x
@@ -59,9 +59,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         "genPdf": "Ctrl+Return",
         "genLatex": "Alt+Return"
     }
+
     for func in operations:
         exec(f"""
-            \n@QtCore.pyqtSlot()
+            \n@pyqtSlot()
             \ndef on_{func}Bt_clicked(self):
             \n    self.mathdoc.{func}(self.expTxt.toPlainText().replace(" ", ""))
         """)
@@ -72,7 +73,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.authorTxt.toPlainText(),
         )
 
-    @QtCore.pyqtSlot()
+    @pyqtSlot()
     def on_genPdfBt_clicked(self):
         self.headingFunc()
         self.mathdoc.generate_pdf(
@@ -80,7 +81,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             clean_tex=True
         )
 
-    @QtCore.pyqtSlot()
+    @pyqtSlot()
     def on_genLatexBt_clicked(self):
         self.headingFunc()
         self.mathdoc.generate_tex(self.fileTxt.text())

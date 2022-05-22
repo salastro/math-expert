@@ -3,6 +3,7 @@ from __future__ import division
 import logging
 
 from PyQt5.QtWidgets import QMainWindow
+from PyQt5 import QtCore
 from sympy import (acos, asin, atan, cos, cot, csc, dsolve, exp, ln, log, oo,
                    pi, sec, sin, sqrt, symbols, sympify, tan)
 from sympy.abc import x
@@ -21,7 +22,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.headingFunc()
         for op, shortcut in self.operations.items():
             exec(f"""
-                \nself.{op}Bt.clicked.connect(self.{op}Func)
                 \nself.{op}Bt.setShortcut("{shortcut}")
             """)
 
@@ -34,15 +34,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         :returns: TODO
 
         """
+        from traceback import format_tb
+
         logging.error(f"Exception Type: {exc_type}")
         logging.error(f"Exception Value: {exc_value}")
-        logging.error(f"Exception Traceback: {exc_traceback}")
+        logging.error(f"Exception Traceback: {format_tb(exc_traceback)}")
 
         errorbox = QtWidgets.QMessageBox()
         errorbox.setText(f"""Error:
         \n{exc_type}
         \n{exc_value}
-        \n{exc_traceback}
+        \n{format_tb(exc_traceback)}
         """)
         errorbox.exec_()
 
@@ -59,11 +61,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         "genLatex": "Alt+Return"
     }
     for func in operations:
-        if func not in ["genPdf", "genLatex"]:
-            exec(f"""
-                \ndef {func}Func(self):
-                \n    self.mathdoc.{func}(self.expTxt.toPlainText().replace(" ", ""))
-            """)
+        exec(f"""
+            \n@QtCore.pyqtSlot()
+            \ndef on_{func}Bt_clicked(self):
+            \n    self.mathdoc.{func}(self.expTxt.toPlainText().replace(" ", ""))
+        """)
 
     def headingFunc(self):
         self.mathdoc.Heading(
@@ -71,16 +73,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.authorTxt.toPlainText(),
         )
 
-    def genPdfFunc(self):
+    @QtCore.pyqtSlot()
+    def on_genPdfBt_clicked(self):
         self.headingFunc()
         self.mathdoc.generate_pdf(
-            self.fileTxt.toPlainText(),
+            self.fileTxt.text(),
             clean_tex=True
         )
 
-    def genLatexFunc(self):
+    @QtCore.pyqtSlot()
+    def on_genLatexBt_clicked(self):
         self.headingFunc()
-        self.mathdoc.generate_tex(self.fileTxt.toPlainText())
+        self.mathdoc.generate_tex(self.fileTxt.text())
 
 
 if __name__ == "__main__":

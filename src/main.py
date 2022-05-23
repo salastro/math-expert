@@ -4,31 +4,31 @@ from loguru import logger
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QMainWindow
 
-from func import MathDoc
+from func import MathDocument
 from gui import QtWidgets, Ui_MainWindow
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        sys.excepthook = self.exceptHook
+        sys.excepthook = self.except_hook
         self.setupUi(self)
-        self.mathdoc = MathDoc()
-        self.headingFunc()
-        self.expTxt.setFocus()
+        self.mathdoc = MathDocument()
+        self.heading_func()
+        self.expression.setFocus()
 
     operations = ["inte", "diff", "lim", "fact", "sol",
-                  "simp", "eval", "plot", "genPdf", "genLatex"]
+                  "simp", "eval", "plot", "generate_pdf", "generate_latex"]
 
     for func in operations:
         exec(f"""
             \n@pyqtSlot()
-            \ndef on_{func}Bt_clicked(self):
-            \n    self.mathdoc.{func}(self.expTxt.toPlainText().replace(" ", \
-                ""))
+            \ndef on_{func}_bt_clicked(self):
+            \n    self.mathdoc.{func}(self.expression.toPlainText().\
+                replace(" ", ""))
         """)
 
-    def exceptHook(self, exc_type, exc_value, exc_traceback):
+    def except_hook(self, exc_type, exc_value, exc_traceback):
         """Exceptions hook to be shown
 
         :exc_type: TODO
@@ -51,24 +51,24 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 """)
         errorbox.exec_()
 
-    def headingFunc(self):
+    def heading_func(self):
         self.mathdoc.doc_heading(
-            self.titleTxt.toPlainText(),
-            self.authorTxt.toPlainText(),
+            self.title.toPlainText(),
+            self.author.toPlainText(),
         )
 
     @pyqtSlot()
-    def on_genPdfBt_clicked(self):
-        self.headingFunc()
+    def on_generate_pdf_bt_clicked(self):
+        self.heading_func()
         self.mathdoc.generate_pdf(
-            self.fileTxt.text(),
+            self.filename.text(),
             clean_tex=True
         )
 
     @pyqtSlot()
-    def on_genLatexBt_clicked(self):
-        self.headingFunc()
-        self.mathdoc.generate_tex(self.fileTxt.text())
+    def on_generate_latex_bt_clicked(self):
+        self.heading_func()
+        self.mathdoc.generate_tex(self.filename.text())
 
 
 if __name__ == "__main__":

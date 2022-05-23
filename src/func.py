@@ -12,7 +12,7 @@ from sympy.abc import x
 from sympy.printing import latex
 
 
-class MathDoc(Document):
+class MathDocument(Document):
     def __init__(self):
         super().__init__()
         # TODO: add preamble change gemotry
@@ -166,7 +166,7 @@ class MathDoc(Document):
 
 if __name__ == "__main__":
     # geometry_options = {"tmargin": "1cm", "lmargin": "10cm"}
-    doc = MathDoc()
+    doc = MathDocument()
     FILE = "full"
 
     doc.doc_heading(title="Func.Py Tests", author="SalahDin Rezk")

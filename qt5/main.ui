@@ -26,7 +26,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="3" column="0" colspan="2">
-     <widget class="QLineEdit" name="fileTxt">
+     <widget class="QLineEdit" name="filename">
       <property name="font">
        <font>
         <pointsize>11</pointsize>
@@ -63,7 +63,7 @@
      </widget>
     </item>
     <item row="6" column="0" colspan="2">
-     <widget class="QPlainTextEdit" name="expTxt">
+     <widget class="QPlainTextEdit" name="expression">
       <property name="font">
        <font>
         <pointsize>11</pointsize>
@@ -125,7 +125,7 @@
      </widget>
     </item>
     <item row="5" column="0" colspan="2">
-     <widget class="QPlainTextEdit" name="authorTxt">
+     <widget class="QPlainTextEdit" name="author">
       <property name="font">
        <font>
         <pointsize>11</pointsize>
@@ -143,7 +143,7 @@
      </widget>
     </item>
     <item row="10" column="1">
-     <widget class="QPushButton" name="simpBt">
+     <widget class="QPushButton" name="simp_bt">
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -158,7 +158,7 @@
      </widget>
     </item>
     <item row="15" column="1">
-     <widget class="QPushButton" name="plotBt">
+     <widget class="QPushButton" name="plot_bt">
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -173,7 +173,7 @@
      </widget>
     </item>
     <item row="11" column="0">
-     <widget class="QPushButton" name="inteBt">
+     <widget class="QPushButton" name="inte_bt">
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -188,7 +188,7 @@
      </widget>
     </item>
     <item row="15" column="0">
-     <widget class="QPushButton" name="evalBt">
+     <widget class="QPushButton" name="eval_bt">
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -203,7 +203,7 @@
      </widget>
     </item>
     <item row="10" column="0">
-     <widget class="QPushButton" name="diffBt">
+     <widget class="QPushButton" name="diff_bt">
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -221,7 +221,7 @@
      </widget>
     </item>
     <item row="4" column="0" colspan="2">
-     <widget class="QPlainTextEdit" name="titleTxt">
+     <widget class="QPlainTextEdit" name="title">
       <property name="font">
        <font>
         <pointsize>11</pointsize>
@@ -248,7 +248,7 @@
      </widget>
     </item>
     <item row="21" column="1">
-     <widget class="QPushButton" name="genLatexBt">
+     <widget class="QPushButton" name="generate_latex_bt">
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -263,7 +263,7 @@
      </widget>
     </item>
     <item row="21" column="0">
-     <widget class="QPushButton" name="genPdfBt">
+     <widget class="QPushButton" name="generate_pdf_bt">
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -291,7 +291,7 @@
      </widget>
     </item>
     <item row="12" column="0">
-     <widget class="QPushButton" name="limBt">
+     <widget class="QPushButton" name="lim_bt">
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -306,7 +306,7 @@
      </widget>
     </item>
     <item row="11" column="1">
-     <widget class="QPushButton" name="factBt">
+     <widget class="QPushButton" name="fact_bt">
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -345,7 +345,7 @@
      </widget>
     </item>
     <item row="12" column="1">
-     <widget class="QPushButton" name="solBt">
+     <widget class="QPushButton" name="sol_bt">
       <property name="font">
        <font>
         <pointsize>10</pointsize>
@@ -361,27 +361,27 @@
     </item>
    </layout>
    <zorder>label_8</zorder>
-   <zorder>plotBt</zorder>
-   <zorder>inteBt</zorder>
+   <zorder>plot_bt</zorder>
+   <zorder>inte_bt</zorder>
    <zorder>label_4</zorder>
-   <zorder>simpBt</zorder>
-   <zorder>solBt</zorder>
-   <zorder>evalBt</zorder>
-   <zorder>factBt</zorder>
+   <zorder>simp_bt</zorder>
+   <zorder>sol_bt</zorder>
+   <zorder>eval_bt</zorder>
+   <zorder>fact_bt</zorder>
    <zorder>label_5</zorder>
-   <zorder>diffBt</zorder>
-   <zorder>authorTxt</zorder>
+   <zorder>diff_bt</zorder>
+   <zorder>author</zorder>
    <zorder>label_6</zorder>
    <zorder>label_2</zorder>
    <zorder>label</zorder>
    <zorder>label_3</zorder>
-   <zorder>expTxt</zorder>
-   <zorder>titleTxt</zorder>
+   <zorder>expression</zorder>
+   <zorder>title</zorder>
    <zorder>frame</zorder>
-   <zorder>genPdfBt</zorder>
-   <zorder>genLatexBt</zorder>
-   <zorder>fileTxt</zorder>
-   <zorder>limBt</zorder>
+   <zorder>generate_pdf_bt</zorder>
+   <zorder>generate_latex_bt</zorder>
+   <zorder>filename</zorder>
+   <zorder>lim_bt</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionNew">
@@ -391,20 +391,20 @@
   </action>
  </widget>
  <tabstops>
-  <tabstop>fileTxt</tabstop>
-  <tabstop>titleTxt</tabstop>
-  <tabstop>authorTxt</tabstop>
-  <tabstop>expTxt</tabstop>
-  <tabstop>diffBt</tabstop>
-  <tabstop>factBt</tabstop>
-  <tabstop>evalBt</tabstop>
-  <tabstop>limBt</tabstop>
-  <tabstop>genLatexBt</tabstop>
-  <tabstop>genPdfBt</tabstop>
-  <tabstop>solBt</tabstop>
-  <tabstop>simpBt</tabstop>
-  <tabstop>inteBt</tabstop>
-  <tabstop>plotBt</tabstop>
+  <tabstop>filename</tabstop>
+  <tabstop>title</tabstop>
+  <tabstop>author</tabstop>
+  <tabstop>expression</tabstop>
+  <tabstop>diff_bt</tabstop>
+  <tabstop>fact_bt</tabstop>
+  <tabstop>eval_bt</tabstop>
+  <tabstop>lim_bt</tabstop>
+  <tabstop>generate_latex_bt</tabstop>
+  <tabstop>generate_pdf_bt</tabstop>
+  <tabstop>sol_bt</tabstop>
+  <tabstop>simp_bt</tabstop>
+  <tabstop>inte_bt</tabstop>
+  <tabstop>plot_bt</tabstop>
  </tabstops>
  <resources>
   <include location="media.qrc"/>

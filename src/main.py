@@ -1,7 +1,6 @@
 from __future__ import division
 
-import logging
-
+from loguru import logger
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QMainWindow
 from sympy import (acos, asin, atan, cos, cot, csc, dsolve, exp, ln, log, oo,
@@ -42,9 +41,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         from traceback import format_tb
 
-        logging.error(f"Exception Type: {exc_type}")
-        logging.error(f"Exception Value: {exc_value}")
-        logging.error(f"Exception Traceback: {format_tb(exc_traceback)}")
+        logger.error(f"Exception Type: {exc_type}")
+        logger.error(f"Exception Value: {exc_value}")
+        logger.error(f"Exception Traceback: {format_tb(exc_traceback)}")
 
         errorbox = QtWidgets.QMessageBox()
         errorbox.setText(f"""Error:
@@ -76,10 +75,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
 if __name__ == "__main__":
     import sys
-
-    level = logging.DEBUG
-    fmt = "[%(levelname)s] %(asctime)s - %(funcName)s|%(message)s"
-    logging.basicConfig(level=level, format=fmt)
 
     app = QtWidgets.QApplication(sys.argv)
     window = MainWindow()

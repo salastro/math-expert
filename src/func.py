@@ -1,7 +1,6 @@
 from __future__ import division
 
-import logging
-
+from loguru import logger
 from pylatex import Alignat, Axis, Center, Command, Document, Plot, TikZ
 # Section, Subsection, Math, Figure, Matrix,
 from pylatex.utils import NoEscape
@@ -22,9 +21,9 @@ class MathDoc(Document):
         self.preamble.append(Command("title", title))
         self.preamble.append(Command("author", author))
         self.preamble.append(Command("date", NoEscape(date)))
-        logging.debug(f"Title: {title}")
-        logging.debug(f"Author: {author}")
-        logging.debug(f"Date: {date}")
+        logger.debug(f"Title: {title}")
+        logger.debug(f"Author: {author}")
+        logger.debug(f"Date: {date}")
         self.append(NoEscape(r"\maketitle"))
 
     def doc_append(self, *equations: str) -> None:
@@ -38,20 +37,20 @@ class MathDoc(Document):
             for equation in equations:
                 if equation is not None:
                     agn.append(equation)
-                logging.debug(f"Appended: {equation}")
+                logger.debug(f"Appended: {equation}")
 
     def inte(self, equation: str) -> None:
-        logging.debug(f"Orignial Equation: {equation}")
+        logger.debug(f"Orignial Equation: {equation}")
         solvable = True
         equation = sympify(equation)
-        logging.debug(f"Sympifyed Equation: {equation}")
+        logger.debug(f"Sympifyed Equation: {equation}")
         solution = trigsimp(simplify(integrate(equation, x)))
         # solution = integrate(trigsimp(simplify(equation)), x)
         equation = Integral(equation, x)
         if str(equation) == str(solution):
             solution = "No Computable Integral"
             solvable = False
-        logging.debug(f"Solution: {solution}")
+        logger.debug(f"Solution: {solution}")
         self.doc_append(
             latex(equation),
             r"=",
@@ -60,19 +59,19 @@ class MathDoc(Document):
         )
 
     def diff(self, equation: str) -> None:
-        logging.debug(f"Orignial Equation: {equation}")
+        logger.debug(f"Orignial Equation: {equation}")
         eq_fmt = equation.split(",")
         equation = sympify(eq_fmt[0])
-        logging.debug(f"Sympifyed Equation: {equation}")
+        logger.debug(f"Sympifyed Equation: {equation}")
         order = int(eq_fmt[1]) if len(eq_fmt) == 2 else 1
-        logging.debug(f"Derivative order: {order}")
+        logger.debug(f"Derivative order: {order}")
         solution = simplify(diff(equation, x, order))
         equation = Derivative(equation, x, order)
-        logging.debug(f"Solution: {solution}")
+        logger.debug(f"Solution: {solution}")
         self.doc_append(latex(equation), r"=", latex(solution))
 
     def lim(self, equation: str) -> None:
-        logging.debug(f"Orignial Equation: {equation}")
+        logger.debug(f"Orignial Equation: {equation}")
         eq_fmt = list(map(sympify, equation.split(",")))
         match len(eq_fmt):
             case 1:
@@ -82,44 +81,45 @@ class MathDoc(Document):
             case 3:
                 show, approach, sign = eq_fmt[0], eq_fmt[1], eq_fmt[2]
         solution = limit(show, x, approach, sign)
-        logging.debug(f"Sympifyed Equation: {show}")
-        logging.debug(f"Approach to: {approach}")
-        logging.debug(f"Sign: {sign}")
+        logger.debug(f"Sympifyed Equation: {show}")
+        logger.debug(f"Approach to: {approach}")
+        logger.debug(f"Sign: {sign}")
         if Limit(show, x, approach, sign) == solution:
             solution = "No Computable Limit"
-        logging.debug(f"Solution: {solution}")
-        self.doc_append(latex(Limit(show, x, approach, sign)), r"=", latex(solution))
+        logger.debug(f"Solution: {solution}")
+        self.doc_append(latex(Limit(show, x, approach, sign)),
+                        r"=", latex(solution))
 
     def simp(self, equation: str) -> None:
-        logging.debug(f"Orignial Equation: {equation}")
+        logger.debug(f"Orignial Equation: {equation}")
         equation = sympify(equation)
-        logging.debug(f"Sympifyed Equation: {equation}")
+        logger.debug(f"Sympifyed Equation: {equation}")
         solution = trigsimp(simplify(equation))
-        logging.debug(f"Solution: {solution}")
+        logger.debug(f"Solution: {solution}")
         self.doc_append(latex(equation), r"=", latex(solution))
 
     def fact(self, equation: str) -> None:
-        logging.debug(f"Orignial Equation: {equation}")
+        logger.debug(f"Orignial Equation: {equation}")
         equation = sympify(equation)
-        logging.debug(f"Sympifyed Equation: {equation}")
+        logger.debug(f"Sympifyed Equation: {equation}")
         solution = factor(equation)
         solution = trigsimp(simplify(equation))
-        logging.debug(f"Solution: {solution}")
+        logger.debug(f"Solution: {solution}")
         self.doc_append(latex(equation), r"=", latex(solution))
 
     def sol(self, equation: str) -> None:
-        logging.debug(f"Orignial Equation: {equation}")
+        logger.debug(f"Orignial Equation: {equation}")
         if "=" in equation:
             eq_fmt = list(map(sympify, equation.split("=")))
-            logging.debug(f"Sympifyed Equation: {eq_fmt[0]} = {eq_fmt[1]}")
+            logger.debug(f"Sympifyed Equation: {eq_fmt[0]} = {eq_fmt[1]}")
             solution = solve(Eq(eq_fmt[0], eq_fmt[1]))
             is_x = True
         else:
             equation = sympify(equation)
-            logging.debug(f"Sympifyed Equation: {equation}")
+            logger.debug(f"Sympifyed Equation: {equation}")
             solution = solve(sympify(equation))
             is_x = False
-        logging.debug(f"Solution: {solution}")
+        logger.debug(f"Solution: {solution}")
         self.doc_append(
             latex(equation)
             if not is_x
@@ -133,11 +133,11 @@ class MathDoc(Document):
         from numpy import (arccos, arcsin, arctan, cos, exp, log, log10, pi,
                            sin, sqrt, tan)
 
-        logging.debug(f"Orignial Equation: {equation}")
+        logger.debug(f"Orignial Equation: {equation}")
         solution = sympify(eval(equation.replace("^", "**")))
         equation = sympify(equation, evaluate=False)
-        logging.debug(f"Sympifyed Equation: {equation}")
-        logging.debug(f"Solution: {solution}")
+        logger.debug(f"Sympifyed Equation: {equation}")
+        logger.debug(f"Solution: {solution}")
         # solution = eval(equation)
         self.doc_append(latex(equation), r"=", latex(solution))
 
@@ -149,10 +149,10 @@ class MathDoc(Document):
         grid: str = "both",
         axis_lines: str = "middle",
     ) -> None:
-        logging.debug(f"Orignial Equation: {equation}")
-        logging.debug(f"Gemotry: {height}, {width}")
-        logging.debug(f"Grid: {grid}")
-        logging.debug(f"Axis: {axis_lines}")
+        logger.debug(f"Orignial Equation: {equation}")
+        logger.debug(f"Gemotry: {height}, {width}")
+        logger.debug(f"Grid: {grid}")
+        logger.debug(f"Axis: {axis_lines}")
         with self.create(Center()):
             with self.create(TikZ()):
                 plot_options = f"height={height}, width={width}, grid={grid}, axis lines={axis_lines}"
@@ -161,10 +161,6 @@ class MathDoc(Document):
 
 
 if __name__ == "__main__":
-    LEVEL = logging.DEBUG
-    FMT = '[%(levelname)s] %(asctime)s - %(funcName)s|%(message)s'
-    logging.basicConfig(level=LEVEL, format=FMT)
-
     # geometry_options = {"tmargin": "1cm", "lmargin": "10cm"}
     doc = MathDoc()
     FILE = "full"

@@ -3,9 +3,6 @@ from __future__ import division
 from loguru import logger
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QMainWindow
-from sympy import (acos, asin, atan, cos, cot, csc, dsolve, exp, ln, log, oo,
-                   pi, sec, sin, sqrt, symbols, sympify, tan)
-from sympy.abc import x
 
 from func import MathDoc
 from gui import QtWidgets, Ui_MainWindow
@@ -27,7 +24,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         exec(f"""
             \n@pyqtSlot()
             \ndef on_{func}Bt_clicked(self):
-            \n    self.mathdoc.{func}(self.expTxt.toPlainText().replace(" ", ""))
+            \n    self.mathdoc.{func}(self.expTxt.toPlainText().replace(" ", \
+                ""))
         """)
 
     def exceptHook(self, exc_type, exc_value, exc_traceback):

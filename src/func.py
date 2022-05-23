@@ -17,7 +17,11 @@ class MathDoc(Document):
         super().__init__()
         # TODO: add preamble change gemotry
 
-    def doc_heading(self, title: str, author: str, date: str = r"\today") -> None:
+    def doc_heading(
+            self, title: str,
+            author: str,
+            date: str = r"\today"
+    ) -> None:
         self.preamble.append(Command("title", title))
         self.preamble.append(Command("author", author))
         self.preamble.append(Command("date", NoEscape(date)))
@@ -138,7 +142,6 @@ class MathDoc(Document):
         equation = sympify(equation, evaluate=False)
         logger.debug(f"Sympifyed Equation: {equation}")
         logger.debug(f"Solution: {solution}")
-        # solution = eval(equation)
         self.doc_append(latex(equation), r"=", latex(solution))
 
     def plot(
@@ -155,7 +158,8 @@ class MathDoc(Document):
         logger.debug(f"Axis: {axis_lines}")
         with self.create(Center()):
             with self.create(TikZ()):
-                plot_options = f"height={height}, width={width}, grid={grid}, axis lines={axis_lines}"
+                plot_options = f"height={height}, width={width}, \
+                grid={grid}, axis lines={axis_lines}"
                 with self.create(Axis(options=plot_options)) as plot:
                     plot.append(Plot(name=equation, func=equation))
 

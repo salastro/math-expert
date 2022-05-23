@@ -65,10 +65,8 @@ class MathDoc(Document):
         logging.debug(f"Sympifyed Equation: {equation}")
         n = int(eq[1]) if len(eq) == 2 else 1
         logging.debug(f"Derivative order: {n}")
-        solution = equation
-        for _ in range(n):
-            solution = simplify(diff(solution, x))
-            equation = Derivative(equation, x)
+        solution = simplify(diff(equation, x, n))
+        equation = Derivative(equation, x, n)
         logging.debug(f"Solution: {solution}")
         self.Append(latex(equation), r"=", latex(solution))
 
@@ -175,6 +173,7 @@ if __name__ == "__main__":
 
     doc.inte("(sin(x) ** 2 - cos(x) ** 2) / (cos(x) ** 2 * sin(x) ** 2)")
     doc.inte("x^x")
+    doc.inte("exp(-x^2)")
     doc.diff("x**(1/x)")
     doc.diff("x**(1/x), 2")
     doc.lim("2/sin(2*x),oo")

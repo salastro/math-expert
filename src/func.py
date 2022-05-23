@@ -6,7 +6,7 @@ from pylatex import Alignat, Axis, Center, Command, Document, Plot, TikZ
 # Section, Subsection, Math, Figure, Matrix,
 from pylatex.utils import NoEscape
 from sympy import (Derivative, Eq, Integral, Limit, diff, factor, integrate,
-                   limit, oo, simplify, solve, sqrt, sympify, trigsimp)
+                   limit, simplify, solve, sympify, trigsimp)
 # from sympy.integrals.manualintegrate import manualintegrate, integral_steps
 # from sympy.integrals.risch import NonElementaryIntegral
 from sympy.abc import x
@@ -18,7 +18,7 @@ class MathDoc(Document):
         super().__init__()
         # TODO: add preamble change gemotry
 
-    def Heading(self, title: str, author: str, date: str = r"\today") -> None:
+    def doc_heading(self, title: str, author: str, date: str = r"\today") -> None:
         self.preamble.append(Command("title", title))
         self.preamble.append(Command("author", author))
         self.preamble.append(Command("date", NoEscape(date)))
@@ -27,7 +27,7 @@ class MathDoc(Document):
         logging.debug(f"Date: {date}")
         self.append(NoEscape(r"\maketitle"))
 
-    def Append(self, *equations: str) -> None:
+    def doc_append(self, *equations: str) -> None:
         """Append a sequence of experssions into the document
 
         :*equations: the experssions to be added to the document
@@ -36,7 +36,8 @@ class MathDoc(Document):
         """
         with self.create(Alignat(numbering=True, escape=False)) as agn:
             for equation in equations:
-                agn.append(equation) if equation is not None else None
+                if equation is not None:
+                    agn.append(equation)
                 logging.debug(f"Appended: {equation}")
 
     def inte(self, equation: str) -> None:
@@ -51,7 +52,7 @@ class MathDoc(Document):
             solution = "No Computable Integral"
             solvable = False
         logging.debug(f"Solution: {solution}")
-        self.Append(
+        self.doc_append(
             latex(equation),
             r"=",
             latex(solution),
@@ -60,34 +61,34 @@ class MathDoc(Document):
 
     def diff(self, equation: str) -> None:
         logging.debug(f"Orignial Equation: {equation}")
-        eq = equation.split(",")
-        equation = sympify(eq[0])
+        eq_fmt = equation.split(",")
+        equation = sympify(eq_fmt[0])
         logging.debug(f"Sympifyed Equation: {equation}")
-        n = int(eq[1]) if len(eq) == 2 else 1
-        logging.debug(f"Derivative order: {n}")
-        solution = simplify(diff(equation, x, n))
-        equation = Derivative(equation, x, n)
+        order = int(eq_fmt[1]) if len(eq_fmt) == 2 else 1
+        logging.debug(f"Derivative order: {order}")
+        solution = simplify(diff(equation, x, order))
+        equation = Derivative(equation, x, order)
         logging.debug(f"Solution: {solution}")
-        self.Append(latex(equation), r"=", latex(solution))
+        self.doc_append(latex(equation), r"=", latex(solution))
 
     def lim(self, equation: str) -> None:
         logging.debug(f"Orignial Equation: {equation}")
-        eq = list(map(lambda a: sympify(a), equation.split(",")))
-        match len(eq):
+        eq_fmt = list(map(sympify, equation.split(",")))
+        match len(eq_fmt):
             case 1:
-                show, a, s = equation, 0, "+"
+                show, approach, sign = equation, 0, "+"
             case 2:
-                show, a, s = eq[0], eq[1], "+"
+                show, approach, sign = eq_fmt[0], eq_fmt[1], "+"
             case 3:
-                show, a, s = eq[0], eq[1], eq[2]
-        solution = limit(show, x, a, s)
+                show, approach, sign = eq_fmt[0], eq_fmt[1], eq_fmt[2]
+        solution = limit(show, x, approach, sign)
         logging.debug(f"Sympifyed Equation: {show}")
-        logging.debug(f"Approach to: {a}")
-        logging.debug(f"Sign: {s}")
-        if Limit(show, x, a, s) == solution:
+        logging.debug(f"Approach to: {approach}")
+        logging.debug(f"Sign: {sign}")
+        if Limit(show, x, approach, sign) == solution:
             solution = "No Computable Limit"
         logging.debug(f"Solution: {solution}")
-        self.Append(latex(Limit(show, x, a, s)), r"=", latex(solution))
+        self.doc_append(latex(Limit(show, x, approach, sign)), r"=", latex(solution))
 
     def simp(self, equation: str) -> None:
         logging.debug(f"Orignial Equation: {equation}")
@@ -95,7 +96,7 @@ class MathDoc(Document):
         logging.debug(f"Sympifyed Equation: {equation}")
         solution = trigsimp(simplify(equation))
         logging.debug(f"Solution: {solution}")
-        self.Append(latex(equation), r"=", latex(solution))
+        self.doc_append(latex(equation), r"=", latex(solution))
 
     def fact(self, equation: str) -> None:
         logging.debug(f"Orignial Equation: {equation}")
@@ -104,25 +105,25 @@ class MathDoc(Document):
         solution = factor(equation)
         solution = trigsimp(simplify(equation))
         logging.debug(f"Solution: {solution}")
-        self.Append(latex(equation), r"=", latex(solution))
+        self.doc_append(latex(equation), r"=", latex(solution))
 
     def sol(self, equation: str) -> None:
         logging.debug(f"Orignial Equation: {equation}")
         if "=" in equation:
-            eq = list(map(lambda a: sympify(a), equation.split("=")))
-            logging.debug(f"Sympifyed Equation: {eq[0]} = {eq[1]}")
-            solution = solve(Eq(eq[0], eq[1]))
-            x_ = True
+            eq_fmt = list(map(sympify, equation.split("=")))
+            logging.debug(f"Sympifyed Equation: {eq_fmt[0]} = {eq_fmt[1]}")
+            solution = solve(Eq(eq_fmt[0], eq_fmt[1]))
+            is_x = True
         else:
             equation = sympify(equation)
             logging.debug(f"Sympifyed Equation: {equation}")
             solution = solve(sympify(equation))
-            x_ = False
+            is_x = False
         logging.debug(f"Solution: {solution}")
-        self.Append(
+        self.doc_append(
             latex(equation)
-            if not x_
-            else rf"{latex(sympify(eq[0]))} = {latex(sympify(eq[1]))}",
+            if not is_x
+            else rf"{latex(sympify(eq_fmt[0]))} = {latex(sympify(eq_fmt[1]))}",
             r"\Rightarrow",
             r"x=",
             latex(solution),
@@ -138,7 +139,7 @@ class MathDoc(Document):
         logging.debug(f"Sympifyed Equation: {equation}")
         logging.debug(f"Solution: {solution}")
         # solution = eval(equation)
-        self.Append(latex(equation), r"=", latex(solution))
+        self.doc_append(latex(equation), r"=", latex(solution))
 
     def plot(
         self,
@@ -160,16 +161,15 @@ class MathDoc(Document):
 
 
 if __name__ == "__main__":
-    level = logging.DEBUG
-    fmt = '[%(levelname)s] %(asctime)s - %(funcName)s|%(message)s'
-    logging.basicConfig(level=level, format=fmt)
+    LEVEL = logging.DEBUG
+    FMT = '[%(levelname)s] %(asctime)s - %(funcName)s|%(message)s'
+    logging.basicConfig(level=LEVEL, format=FMT)
 
     # geometry_options = {"tmargin": "1cm", "lmargin": "10cm"}
     doc = MathDoc()
-    file_name = "full"
+    FILE = "full"
 
-    doc.Heading(title="Func.Py Tests", author="SalahDin Rezk")
-    from sympy import cos, sin
+    doc.doc_heading(title="Func.Py Tests", author="SalahDin Rezk")
 
     doc.inte("(sin(x) ** 2 - cos(x) ** 2) / (cos(x) ** 2 * sin(x) ** 2)")
     doc.inte("x^x")
@@ -188,4 +188,4 @@ if __name__ == "__main__":
     doc.eval("sin(45/cos(3))")
     doc.eval("sin(1j)")
 
-    doc.generate_pdf(file_name, clean_tex=True)
+    doc.generate_pdf(FILE, clean_tex=True)

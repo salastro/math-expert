@@ -55,7 +55,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         errorbox.exec_()
 
     def headingFunc(self):
-        self.mathdoc.Heading(
+        self.mathdoc.doc_heading(
             self.titleTxt.toPlainText(),
             self.authorTxt.toPlainText(),
         )

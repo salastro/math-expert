@@ -1,4 +1,7 @@
+"""Incomplete easy-to-use math solver and PDF generator."""
 from __future__ import division
+
+from traceback import format_tb
 
 from loguru import logger
 from PyQt5.QtCore import pyqtSlot
@@ -9,7 +12,10 @@ from gui import QtWidgets, Ui_MainWindow
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
+    """MainWindow."""
+
     def __init__(self):
+        """__init__."""
         super().__init__()
         sys.excepthook = self.except_hook
         self.setupUi(self)
@@ -28,17 +34,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 replace(" ", ""))
         """)
 
-    def except_hook(self, exc_type, exc_value, exc_traceback):
-        """Exceptions hook to be shown
+    @staticmethod
+    def except_hook(exc_type, exc_value, exc_traceback):
+        """Message Box to be shown on exceptions hook.
 
-        :exc_type: TODO
-        :exc_value: TODO
-        :exc_traceback: TODO
-        :returns: TODO
-
+        :param exc_type:
+        :param exc_value:
+        :param exc_traceback:
         """
-        from traceback import format_tb
-
         logger.error(f"Exception Type: {exc_type}")
         logger.error(f"Exception Value: {exc_value}")
         logger.error(f"Exception Traceback: {format_tb(exc_traceback)}")
@@ -52,6 +55,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         errorbox.exec_()
 
     def heading_func(self):
+        """heading_func."""
         self.mathdoc.doc_heading(
             self.title.toPlainText(),
             self.author.toPlainText(),
@@ -59,6 +63,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     @pyqtSlot()
     def on_generate_pdf_bt_clicked(self):
+        """on_generate_pdf_bt_clicked."""
         self.heading_func()
         self.mathdoc.generate_pdf(
             self.filename.text(),
@@ -67,6 +72,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     @pyqtSlot()
     def on_generate_latex_bt_clicked(self):
+        """on_generate_latex_bt_clicked."""
         self.heading_func()
         self.mathdoc.generate_tex(self.filename.text())
 

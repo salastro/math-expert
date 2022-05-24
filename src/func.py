@@ -1,3 +1,4 @@
+"""Functions that operates on the math document."""
 from __future__ import division
 
 from loguru import logger
@@ -13,7 +14,10 @@ from sympy.printing import latex
 
 
 class MathDocument(Document):
+    """MathDocument."""
+
     def __init__(self):
+        """__init__."""
         super().__init__()
         # TODO: add preamble change gemotry
 
@@ -22,6 +26,15 @@ class MathDocument(Document):
             author: str,
             date: str = r"\today"
     ) -> None:
+        """doc_heading.
+
+        :param title:
+        :type title: str
+        :param author:
+        :type author: str
+        :param date:
+        :type date: str
+        """
         self.preamble.append(Command("title", title))
         self.preamble.append(Command("author", author))
         self.preamble.append(Command("date", NoEscape(date)))
@@ -31,11 +44,10 @@ class MathDocument(Document):
         self.append(NoEscape(r"\maketitle"))
 
     def doc_append(self, *equations: str) -> None:
-        """Append a sequence of experssions into the document
+        """Append a sequence of experssions into the document.
 
-        :*equations: the experssions to be added to the document
-        :returns: None
-
+        :param equations: the experssions to be added to the document.
+        :type equations: str
         """
         with self.create(Alignat(numbering=True, escape=False)) as agn:
             for equation in equations:
@@ -44,6 +56,11 @@ class MathDocument(Document):
                 logger.debug(f"Appended: {equation}")
 
     def inte(self, equation: str) -> None:
+        """inte.
+
+        :param equation:
+        :type equation: str
+        """
         logger.debug(f"Orignial Equation: {equation}")
         solvable = True
         equation = sympify(equation)
@@ -63,6 +80,11 @@ class MathDocument(Document):
         )
 
     def diff(self, equation: str) -> None:
+        """diff.
+
+        :param equation:
+        :type equation: str
+        """
         logger.debug(f"Orignial Equation: {equation}")
         eq_fmt = equation.split(",")
         equation = sympify(eq_fmt[0])
@@ -75,6 +97,11 @@ class MathDocument(Document):
         self.doc_append(latex(equation), r"=", latex(solution))
 
     def lim(self, equation: str) -> None:
+        """lim.
+
+        :param equation:
+        :type equation: str
+        """
         logger.debug(f"Orignial Equation: {equation}")
         eq_fmt = list(map(sympify, equation.split(",")))
         match len(eq_fmt):
@@ -95,6 +122,11 @@ class MathDocument(Document):
                         r"=", latex(solution))
 
     def simp(self, equation: str) -> None:
+        """simp.
+
+        :param equation:
+        :type equation: str
+        """
         logger.debug(f"Orignial Equation: {equation}")
         equation = sympify(equation)
         logger.debug(f"Sympifyed Equation: {equation}")
@@ -103,6 +135,11 @@ class MathDocument(Document):
         self.doc_append(latex(equation), r"=", latex(solution))
 
     def fact(self, equation: str) -> None:
+        """fact.
+
+        :param equation:
+        :type equation: str
+        """
         logger.debug(f"Orignial Equation: {equation}")
         equation = sympify(equation)
         logger.debug(f"Sympifyed Equation: {equation}")
@@ -112,6 +149,11 @@ class MathDocument(Document):
         self.doc_append(latex(equation), r"=", latex(solution))
 
     def sol(self, equation: str) -> None:
+        """sol.
+
+        :param equation:
+        :type equation: str
+        """
         logger.debug(f"Orignial Equation: {equation}")
         if "=" in equation:
             eq_fmt = list(map(sympify, equation.split("=")))
@@ -134,6 +176,11 @@ class MathDocument(Document):
         )
 
     def eval(self, equation: str) -> None:
+        """eval.
+
+        :param equation:
+        :type equation: str
+        """
         from numpy import (arccos, arcsin, arctan, cos, exp, log, log10, pi,
                            sin, sqrt, tan)
 
@@ -152,6 +199,19 @@ class MathDocument(Document):
         grid: str = "both",
         axis_lines: str = "middle",
     ) -> None:
+        """plot.
+
+        :param equation:
+        :type equation: str
+        :param height:
+        :type height: str
+        :param width:
+        :type width: str
+        :param grid:
+        :type grid: str
+        :param axis_lines:
+        :type axis_lines: str
+        """
         logger.debug(f"Orignial Equation: {equation}")
         logger.debug(f"Gemotry: {height}, {width}")
         logger.debug(f"Grid: {grid}")

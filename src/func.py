@@ -35,12 +35,10 @@ class MathDocument(Document):
         :param date:
         :type date: str
         """
+        logger.debug("Creating heading page")
         self.preamble.append(Command("title", title))
         self.preamble.append(Command("author", author))
         self.preamble.append(Command("date", NoEscape(date)))
-        logger.debug(f"Title: {title}")
-        logger.debug(f"Author: {author}")
-        logger.debug(f"Date: {date}")
         self.append(NoEscape(r"\maketitle"))
 
     def doc_append(self, *equations: str) -> None:
@@ -49,11 +47,11 @@ class MathDocument(Document):
         :param equations: the experssions to be added to the document.
         :type equations: str
         """
+        logger.debug(f"Appending {equations}")
         with self.create(Alignat(numbering=True, escape=False)) as agn:
             for equation in equations:
                 if equation is not None:
                     agn.append(equation)
-                logger.debug(f"Appended: {equation}")
 
     def inte(self, equation: str) -> None:
         """inte.
@@ -61,40 +59,40 @@ class MathDocument(Document):
         :param equation:
         :type equation: str
         """
-        logger.debug(f"Orignial Equation: {equation}")
+        logger.debug(f"Integrating {equation}")
         solvable = True
         equation = sympify(equation)
-        logger.debug(f"Sympifyed Equation: {equation}")
         solution = trigsimp(simplify(integrate(equation, x)))
         # solution = integrate(trigsimp(simplify(equation)), x)
-        equation = Integral(equation, x)
-        if str(equation) == str(solution):
+        eq_inte = Integral(equation, x)
+        if str(eq_inte) == str(solution):
             solution = "No Computable Integral"
             solvable = False
-        logger.debug(f"Solution: {solution}")
         self.doc_append(
             latex(equation),
             r"=",
             latex(solution),
             r"+C" if solvable else None
         )
+        return equation, solution
 
-    def diff(self, equation: str) -> None:
-        """diff.
+    def diff(self, equation: str) -> dict:
+        """Differentiate an input equation.
 
-        :param equation:
+        :param equation: in the form (x-variable experssions, order)
         :type equation: str
+        :rtype: dict
         """
-        logger.debug(f"Orignial Equation: {equation}")
+        logger.debug(f"Differentiating {equation}")
         eq_fmt = equation.split(",")
         equation = sympify(eq_fmt[0])
-        logger.debug(f"Sympifyed Equation: {equation}")
         order = int(eq_fmt[1]) if len(eq_fmt) == 2 else 1
-        logger.debug(f"Derivative order: {order}")
         solution = simplify(diff(equation, x, order))
-        equation = Derivative(equation, x, order)
-        logger.debug(f"Solution: {solution}")
-        self.doc_append(latex(equation), r"=", latex(solution))
+        eq_diff = Derivative(equation, x, order)
+        self.doc_append(latex(eq_diff),
+                        r"=",
+                        latex(solution))
+        return equation, order, solution
 
     def lim(self, equation: str) -> None:
         """lim.
@@ -102,7 +100,7 @@ class MathDocument(Document):
         :param equation:
         :type equation: str
         """
-        logger.debug(f"Orignial Equation: {equation}")
+        logger.debug(f"Findining limit of {equation}")
         eq_fmt = list(map(sympify, equation.split(",")))
         match len(eq_fmt):
             case 1:
@@ -112,14 +110,11 @@ class MathDocument(Document):
             case 3:
                 show, approach, sign = eq_fmt[0], eq_fmt[1], eq_fmt[2]
         solution = limit(show, x, approach, sign)
-        logger.debug(f"Sympifyed Equation: {show}")
-        logger.debug(f"Approach to: {approach}")
-        logger.debug(f"Sign: {sign}")
         if Limit(show, x, approach, sign) == solution:
             solution = "No Computable Limit"
-        logger.debug(f"Solution: {solution}")
         self.doc_append(latex(Limit(show, x, approach, sign)),
                         r"=", latex(solution))
+        return show, approach, sign, solution
 
     def simp(self, equation: str) -> None:
         """simp.
@@ -127,12 +122,11 @@ class MathDocument(Document):
         :param equation:
         :type equation: str
         """
-        logger.debug(f"Orignial Equation: {equation}")
+        logger.debug(f"Simplifying {equation}")
         equation = sympify(equation)
-        logger.debug(f"Sympifyed Equation: {equation}")
         solution = trigsimp(simplify(equation))
-        logger.debug(f"Solution: {solution}")
         self.doc_append(latex(equation), r"=", latex(solution))
+        return equation, solution
 
     def fact(self, equation: str) -> None:
         """fact.
@@ -140,13 +134,12 @@ class MathDocument(Document):
         :param equation:
         :type equation: str
         """
-        logger.debug(f"Orignial Equation: {equation}")
+        logger.debug(f"Factorizing {equation}")
         equation = sympify(equation)
-        logger.debug(f"Sympifyed Equation: {equation}")
         solution = factor(equation)
         solution = trigsimp(simplify(equation))
-        logger.debug(f"Solution: {solution}")
         self.doc_append(latex(equation), r"=", latex(solution))
+        return equation, solution
 
     def sol(self, equation: str) -> None:
         """sol.
@@ -154,18 +147,15 @@ class MathDocument(Document):
         :param equation:
         :type equation: str
         """
-        logger.debug(f"Orignial Equation: {equation}")
+        logger.debug(f"Solving {equation} for x")
         if "=" in equation:
             eq_fmt = list(map(sympify, equation.split("=")))
-            logger.debug(f"Sympifyed Equation: {eq_fmt[0]} = {eq_fmt[1]}")
             solution = solve(Eq(eq_fmt[0], eq_fmt[1]))
             is_x = True
         else:
             equation = sympify(equation)
-            logger.debug(f"Sympifyed Equation: {equation}")
             solution = solve(sympify(equation))
             is_x = False
-        logger.debug(f"Solution: {solution}")
         self.doc_append(
             latex(equation)
             if not is_x
@@ -174,6 +164,9 @@ class MathDocument(Document):
             r"x=",
             latex(solution),
         )
+        if is_x:
+            return eq_fmt, solution
+        return equation, solution
 
     def eval(self, equation: str) -> None:
         """eval.
@@ -181,23 +174,19 @@ class MathDocument(Document):
         :param equation:
         :type equation: str
         """
+        logger.debug(f"Evaluating {equation}")
         from numpy import (arccos, arcsin, arctan, cos, exp, log, log10, pi,
                            sin, sqrt, tan)
-
-        logger.debug(f"Orignial Equation: {equation}")
         solution = sympify(eval(equation.replace("^", "**")))
         equation = sympify(equation, evaluate=False)
-        logger.debug(f"Sympifyed Equation: {equation}")
-        logger.debug(f"Solution: {solution}")
         self.doc_append(latex(equation), r"=", latex(solution))
+        return equation, solution
 
     def plot(
         self,
         equation: str,
         height: str = "6cm",
         width: str = "6cm",
-        grid: str = "both",
-        axis_lines: str = "middle",
     ) -> None:
         """plot.
 
@@ -212,14 +201,11 @@ class MathDocument(Document):
         :param axis_lines:
         :type axis_lines: str
         """
-        logger.debug(f"Orignial Equation: {equation}")
-        logger.debug(f"Gemotry: {height}, {width}")
-        logger.debug(f"Grid: {grid}")
-        logger.debug(f"Axis: {axis_lines}")
+        logger.debug(f"Plotting {equation} in {width} w, {height} h")
         with self.create(Center()):
             with self.create(TikZ()):
                 plot_options = f"height={height}, width={width}, \
-                grid={grid}, axis lines={axis_lines}"
+                grid=both, axis lines=middle"
                 with self.create(Axis(options=plot_options)) as plot:
                     plot.append(Plot(name=equation, func=equation))
 

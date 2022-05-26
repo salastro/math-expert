@@ -1,4 +1,4 @@
-.PHONY : clean install test
+.PHONY : clean install dev test ui
 
 VENV?=venv
 PYTHON=${VENV}/bin/python

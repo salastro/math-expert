@@ -80,6 +80,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 if __name__ == "__main__":
     import sys
 
+    # logger.disable("func")
     app = QtWidgets.QApplication(sys.argv)
     window = MainWindow()
     window.show()

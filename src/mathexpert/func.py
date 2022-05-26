@@ -215,6 +215,8 @@ if __name__ == "__main__":
     doc = MathDocument()
     FILE = "full"
 
+    # logger.disable("__main__")
+
     doc.doc_heading(title="Func.Py Tests", author="SalahDin Rezk")
 
     doc.inte("(sin(x) ** 2 - cos(x) ** 2) / (cos(x) ** 2 * sin(x) ** 2)")

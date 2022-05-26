@@ -11,6 +11,12 @@ install: . # in a virtual environment
 	${PYTHON} -m pip install -U pip
 	${PYTHON} -m pip install -e .
 
-test: requirements_dev.txt
+dev: requirements_dev.txt
 	${PYTHON} -m pip install -r requirements_dev.txt
+
+test: 
 	${PYTHON} -m pytest
+
+ui: qt5
+	pyuic5 qt5/main.ui -o src/mathexpert/gui.py
+	pyrcc5 qt5/media.qrc -o src/mathexpert/media_rc.py

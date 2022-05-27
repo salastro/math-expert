@@ -2,7 +2,8 @@
 # Math Expert
 *Let me do your work*
 
-![Unit tests badge](https://github.com/salastro/math-expert/actions/workflows/tests.yml/badge.svg)
+![Linux tests badge](https://github.com/salastro/math-expert/actions/workflows/linux-tests.yml/badge.svg)
+![Windows tests badge](https://github.com/salastro/math-expert/actions/workflows/win-tests.yml/badge.svg)
 
 ## Preview
 

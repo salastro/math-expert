@@ -1,9 +1,15 @@
 """Functions that operates on the math document."""
 from __future__ import division
 
+from functools import reduce
+from operator import mul
+
 from loguru import logger
-from pylatex import Alignat, Axis, Center, Command, Document, Plot, TikZ
-# Section, Subsection, Math, Figure, Matrix,
+from numpy import (arccos, arcsin, arctan, cos, exp, log, log10, matrix, pi,
+                   sin, sqrt, tan)
+from pylatex import (Alignat, Axis, Center, Command, Document, Matrix, Plot,
+                     TikZ)
+# Matrix  Section, Subsection, Math, Figure
 from pylatex.utils import NoEscape
 from sympy import (Derivative, Eq, Integral, Limit, diff, factor, integrate,
                    limit, simplify, solve, sympify, trigsimp)
@@ -51,7 +57,10 @@ class MathDocument(Document):
         with self.create(Alignat(numbering=True, escape=False)) as agn:
             for equation in equations:
                 if equation is not None:
-                    agn.append(equation)
+                    if isinstance(equation, str):
+                        agn.append(equation)
+                    else:
+                        agn.extend(equation)
 
     def inte(self, equation: str) -> None:
         """inte.
@@ -175,8 +184,6 @@ class MathDocument(Document):
         :type equation: str
         """
         logger.debug(f"Evaluating {equation}")
-        from numpy import (arccos, arcsin, arctan, cos, exp, log, log10, pi,
-                           sin, sqrt, tan)
         solution = sympify(eval(equation.replace("^", "**")))
         equation = sympify(equation, evaluate=False)
         self.doc_append(latex(equation), r"=", latex(solution))
@@ -209,6 +216,100 @@ class MathDocument(Document):
                 with self.create(Axis(options=plot_options)) as plot:
                     plot.append(Plot(name=equation, func=equation))
 
+    def matr(self, equation: str) -> None:
+        """Matrix operations.
+
+        Multiplication, addition, subtraction, determinant, etc.
+
+        :equation: TODO
+        :returns: TODO
+
+        """
+        logger.debug(f"Matrix {equation}")
+        # multiplication
+        if "*" in equation:
+            logger.debug(f"Multiplication {equation}")
+
+            eq_fmt = list(map(lambda a: matrix(eval(a)),
+                              equation.split("*")))
+            solution = reduce(mul, eq_fmt)
+            show = list(map(Matrix, eq_fmt))
+            self.doc_append(
+                show,
+                r"=",
+                [Matrix(solution)]
+            )
+            return eq_fmt, show, solution
+        # # division
+        # if "/" in equation:
+        #     eq_fmt = list(map(sympify, equation.split("/")))
+        #     solution = eq_fmt[0] / eq_fmt[1]
+        #     self.doc_append(
+        #         latex(eq_fmt[0]),
+        #         r"\div",
+        #         latex(eq_fmt[1]),
+        #         r"=",
+        #         latex(solution)
+        #     )
+        #     return eq_fmt, solution
+        # # addition
+        # if "+" in equation:
+        #     eq_fmt = list(map(sympify, equation.split("+")))
+        #     solution = eq_fmt[0] + eq_fmt[1]
+        #     self.doc_append(
+        #         latex(eq_fmt[0]),
+        #         r"+",
+        #         latex(eq_fmt[1]),
+        #         r"=",
+        #         latex(solution)
+        #     )
+        #     return eq_fmt, solution
+        # # subtraction
+        # if "-" in equation:
+        #     eq_fmt = list(map(sympify, equation.split("+")))
+        #     solution = eq_fmt[0] - eq_fmt[1]
+        #     self.doc_append(
+        #         latex(eq_fmt[0]),
+        #         r"-",
+        #         latex(eq_fmt[1]),
+        #         r"=",
+        #         latex(solution)
+        #     )
+        #     return eq_fmt, solution
+        # # determinant
+        # if "det" in equation:
+        #     eq_fmt = list(map(sympify, equation.split("det")))
+        #     solution = det(eq_fmt[0])
+        #     self.doc_append(
+        #         latex(eq_fmt[0]),
+        #         r"det",
+        #         r"=",
+        #         latex(solution)
+        #     )
+        #     return eq_fmt, solution
+        # # inverse
+        # if "inv" in equation:
+        #     eq_fmt = list(map(sympify, equation.split("inv")))
+        #     solution = inv(eq_fmt[0])
+        #     self.doc_append(
+        #         latex(eq_fmt[0]),
+        #         r"inv",
+        #         r"=",
+        #         latex(solution)
+        #     )
+        #     return eq_fmt, solution
+        # # transpose
+        # if "T" in equation:
+        #     eq_fmt = list(map(sympify, equation.split("T")))
+        #     solution = eq_fmt[0].T
+        #     self.doc_append(
+        #         latex(eq_fmt[0]),
+        #         r"T",
+        #         r"=",
+        #         latex(solution)
+        #     )
+        #     return eq_fmt, solution
+
 
 if __name__ == "__main__":
     # geometry_options = {"tmargin": "1cm", "lmargin": "10cm"}
@@ -218,22 +319,6 @@ if __name__ == "__main__":
     # logger.disable("__main__")
 
     doc.doc_heading(title="Func.Py Tests", author="SalahDin Rezk")
-
-    doc.inte("(sin(x) ** 2 - cos(x) ** 2) / (cos(x) ** 2 * sin(x) ** 2)")
-    doc.inte("x^x")
-    doc.inte("exp(-x^2)")
-    doc.diff("x**(1/x)")
-    doc.diff("x**(1/x), 2")
-    doc.lim("2/sin(2*x),oo")
-    doc.lim("(sin(x)^2 - cos(x)^2) / (cos(x)^2 * sin(x)^2), oo")
-    doc.lim("(x^3-4*x)/(2*x^2+3*x)")
-    doc.lim("sin(x), oo")
-    doc.sol("x+3=1")
-    doc.sol("x+3>1")
-    doc.eval("2^2")
-    doc.eval("sqrt(2)")
-    doc.eval("sin(2)")
-    doc.eval("sin(45/cos(3))")
-    doc.eval("sin(1j)")
+    doc.matr("[[1,2],[3,4]]*[[1,2],[3,4]]")
 
     doc.generate_pdf(FILE, clean_tex=True)

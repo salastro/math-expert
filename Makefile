@@ -4,7 +4,7 @@ VENV?=venv
 PYTHON=${VENV}/bin/python
 
 clean: # pdf, tex, and log files
-	rm -f *.pdf *.tex *.log
+	rm -f *.pdf *.tex *.log *.aux *.fls *.fdb_latexmk
 
 install: . # in a virtual environment
 	test -d $(VENV) || python -m venv $(VENV)

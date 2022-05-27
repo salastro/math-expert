@@ -4,6 +4,7 @@
 
 ![Linux tests badge](https://github.com/salastro/math-expert/actions/workflows/linux-tests.yml/badge.svg)
 ![Windows tests badge](https://github.com/salastro/math-expert/actions/workflows/win-tests.yml/badge.svg)
+![MacOS tests badge](https://github.com/salastro/math-expert/actions/workflows/macos-tests.yml/badge.svg)
 
 ## Preview
 

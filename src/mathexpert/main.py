@@ -3,12 +3,11 @@ from __future__ import division
 
 from traceback import format_tb
 
+from func import MathDocument
+from gui import QtWidgets, Ui_MainWindow
 from loguru import logger
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QMainWindow
-
-from func import MathDocument
-from gui import QtWidgets, Ui_MainWindow
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -23,8 +22,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.heading_func()
         self.expression.setFocus()
 
-    operations = ["inte", "diff", "lim", "fact", "sol",
-                  "simp", "eval", "plot", "generate_pdf", "generate_latex"]
+    operations = [  # get all the defined methods in the MathDocument class
+        attribute
+        for attribute in dir(MathDocument)
+        if callable(getattr(MathDocument, attribute))
+        and attribute.startswith("_") is False
+    ]
 
     for func in operations:
         exec(f"""
@@ -47,11 +50,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         logger.error(f"Exception Traceback: {format_tb(exc_traceback)}")
 
         errorbox = QtWidgets.QMessageBox()
-        errorbox.setText(f"""Error:
+        errorbox.setText(
+            f"""Error:
                 \n{exc_type}
                 \n{exc_value}
                 \n{format_tb(exc_traceback)}
-                """)
+                """
+        )
         errorbox.exec_()
 
     def heading_func(self):
@@ -65,10 +70,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def on_generate_pdf_bt_clicked(self):
         """on_generate_pdf_bt_clicked."""
         self.heading_func()
-        self.mathdoc.generate_pdf(
-            self.filename.text(),
-            clean_tex=True
-        )
+        self.mathdoc.generate_pdf(self.filename.text(), clean_tex=True)
 
     @pyqtSlot()
     def on_generate_latex_bt_clicked(self):

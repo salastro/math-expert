@@ -62,6 +62,12 @@ limitations, while maintaining a usable toolkit. A highly programmable
 interface that is easily integrable into other environments was the
 product of this decision.
 
+Although Python's default logging module is sufficient, it is utterly
+unappealing. An alternative was sought and `loguru` seemed like a good
+choice. Not much time were put into this choice since it is mostly for
+development purposes. A disadvantages, however, that the code still
+ships to end-users increasing the number of unnecessary dependences.
+
 ## Philosophy
 
 Although the infamous *[it just works](https://www.urbandictionary.com/define.php?term=IT%20JUST%20WORKS)*
@@ -97,9 +103,9 @@ the operations on documents, and `main.py` for the main program and
 linking of the two. This was to ease the switching of undesired modules
 and separate development based on the working context.
 
-`func.py` was mainly structured as one class (`MathDoc`) with multiple methods for
-document manipulation (e.g. `Inte`, `Diff`, etc). The class is
-instantiated and used in `main.py` in the `__name__ == "__main__"` if
+`func.py` was mainly structured as one class (`MathDocument`) with multiple
+methods for document manipulation (e.g. `Inte`, `Diff`, etc). The class
+is instantiated and used in `main.py` in the `__name__ == "__main__"` if
 statement after the imports outside the conditional; on every button
 click the corresponding method is called. In contrast, explicit mentions
 of `gui.py` are rare (besides the linkage ones) since all of its
@@ -126,15 +132,13 @@ aliens will understand the paradigms of this code.
 * Programmable
 
 ### Disadvantages
-* poor error handling
 * limited syntax input
 * limited operations
 * no-preview before add
-* undoable actions
+* cannot undo actions
 
 ### Neutral
 * Unappealing UI
-* No indication when unsolvable
 
 ## Future plans
 See [issues](https://github.com/salastro/math-expert/issues)
@@ -158,10 +162,11 @@ made.
 ## Dependences
 ### Building
 * [Python](https://www.python.org/) 3.10:
-    * [PyLaTeX](https://jeltef.github.io/PyLaTeX/) 1.4
-    * [SymPy](https://www.sympy.org/) 1.10
     * [NumPy](https://numpy.org/) 1.22
+    * [PyLaTeX](https://jeltef.github.io/PyLaTeX/) 1.4
     * [PyQt5](https://www.riverbankcomputing.com/software/pyqt/) 5.15
+    * [SymPy](https://www.sympy.org/) 1.10
+    * [Loguru](https://github.com/Delgan/loguru) 0.6
 ### Running
 * [LaTeX](https://www.latex-project.org/) (see https://github.com/salastro/math-expert/issues/9)
 * [Perl](https://www.perl.org/) (see https://github.com/salastro/math-expert/issues/12)
@@ -172,14 +177,14 @@ made.
 ───────────────────────────────────────────────────────────────────────────────
 Language                 Files     Lines   Blanks  Comments     Code Complexity
 ───────────────────────────────────────────────────────────────────────────────
-Python                       3       445       29        28      388         20
+Python                       3       667       35       161      471         27
 ───────────────────────────────────────────────────────────────────────────────
-Total                        3       445       29        28      388         20
+Total                        3       667       35       161      471         27
 ───────────────────────────────────────────────────────────────────────────────
-Estimated Cost to Develop (organic) $9,996
-Estimated Schedule Effort (organic) 2.389814 months
-Estimated People Required (organic) 0.371638
+Estimated Cost to Develop (organic) $12,253
+Estimated Schedule Effort (organic) 2.581996 months
+Estimated People Required (organic) 0.421626
 ───────────────────────────────────────────────────────────────────────────────
-Processed 17492 bytes, 0.017 megabytes (SI)
+Processed 24907 bytes, 0.025 megabytes (SI)
 ───────────────────────────────────────────────────────────────────────────────
 ```
